@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "img_huangbian",
+    "texture": "214f768f-d78b-44a8-ab3c-2c472eb69838",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      94,
+      86
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      94,
+      86
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

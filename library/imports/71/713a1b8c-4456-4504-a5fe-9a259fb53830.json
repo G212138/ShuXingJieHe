@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "bg_beijing",
+    "texture": "232bd7a1-245c-4264-b5aa-3beff99aaec4",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      2048,
+      1152
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      2048,
+      1152
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "btn-qingkong4",
+    "texture": "453f9800-8590-420a-adcc-e3805286632b",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      127,
+      127
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      127,
+      127
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

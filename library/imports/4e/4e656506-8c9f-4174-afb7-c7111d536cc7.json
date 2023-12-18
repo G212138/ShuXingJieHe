@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "btn-dakou",
+    "texture": "1bf933ec-3ab9-472c-8e2f-d5065e125e19",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      127,
+      127
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      127,
+      127
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

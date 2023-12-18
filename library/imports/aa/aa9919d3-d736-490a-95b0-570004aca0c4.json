@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "btn_shuzi_normal",
+    "texture": "adf365eb-89cb-4847-a51b-2e4f65bd5483",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      80,
+      72
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      80,
+      72
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

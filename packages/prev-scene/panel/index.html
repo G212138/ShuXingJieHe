@@ -1,0 +1,31 @@
+
+<ui-box-container class="layout horizontal">
+    <div class="container" style="display: inline-block;width: 900px; height: 500px;position:relative;overflow: scroll;">
+        <table class="prev-table" style="padding-left: 0px;padding-top: 0%;width: 400px;position:absolute;">
+            <thead>
+                <td class="prev-head" style="padding: 10px;width: 100%">历史浏览场景</td>
+            </thead>
+            <tbody style="position:absolute;padding-top: 20px;">
+                <tr v-for="row in prevSceneData">
+                    <td class="prev-item">
+                        <ui-button color="blue darken-1" text @click="jumpView(row.uuid, true)">{{ row.name }}</ui-button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="prev-table" style="padding-left: 50%;padding-top: 0%;width:500px;position:absolute;">
+            <thead">
+                <td class="prev-head" style="padding: 10px;width: 100%" >历史浏览预制</td>
+            </thead>
+            <tbody style="position:absolute;padding-top: 20px;height: 400px;overflow: scroll;">
+                <tr v-for="row in prevPrefabData">
+                    <td class="prev-item">
+                        <ui-button color="blue darken-1" text @click="jumpView(row.uuid, false)">{{ row.name }}</ui-button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+    </div>
+</ui-box-container>

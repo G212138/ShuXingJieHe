@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "btn_jiajian_normal",
+    "texture": "acb31216-d970-4267-b7d7-d0efba0b6896",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      144,
+      66
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      144,
+      66
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

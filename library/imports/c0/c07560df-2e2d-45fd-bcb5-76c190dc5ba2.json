@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "btn-qiepian",
+    "texture": "8b991ac6-b982-419e-b50c-c919e9833ba7",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      127,
+      127
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      127,
+      127
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

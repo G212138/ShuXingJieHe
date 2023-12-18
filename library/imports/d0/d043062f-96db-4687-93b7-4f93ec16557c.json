@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "btn-houtui3",
+    "texture": "7a9c0d13-4073-4b5e-93b2-876c725af035",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      127,
+      127
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      127,
+      127
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

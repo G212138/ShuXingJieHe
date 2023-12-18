@@ -1,0 +1,23 @@
+{
+  "name": "prev-scene",
+  "version": "0.0.1",
+  "description": "The package template for getting started.",
+  "author": "Cocos Creator",
+  "main": "main.js",
+  "main-menu": {
+    "prev-scene/open-view": {
+      "message": "prev-scene:open",
+      "accelerator": "alt+p"
+    },
+    "prev-scene/clear": {
+      "message": "prev-scene:clear"
+    }
+  },
+  "panel": {
+    "main": "panel/index.js",
+    "type": "dockable",
+    "title": "prev-scene",
+    "width": 400,
+    "height": 300
+  }
+}
