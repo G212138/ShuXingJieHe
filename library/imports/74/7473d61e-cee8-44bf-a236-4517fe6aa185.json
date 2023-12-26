@@ -7,7 +7,7 @@
     "data": {
       "__id__": 1
     },
-    "optimizationPolicy": 0,
+    "optimizationPolicy": 2,
     "asyncLoadAssets": false,
     "readonly": false
   },
@@ -40,13 +40,9 @@
       }
     ],
     "_active": true,
-    "_components": [
-      {
-        "__id__": 23
-      }
-    ],
+    "_components": [],
     "_prefab": {
-      "__id__": 24
+      "__id__": 23
     },
     "_opacity": 255,
     "_color": {
@@ -97,7 +93,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "up",
+    "_name": "1",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -169,7 +165,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "05cd5244-ff80-4d9b-86e9-a6d8d77676e8"
+        "__uuid__": "f37c0c94-3d7b-4869-84ab-92364312f5f7"
       }
     ],
     "_mesh": {
@@ -177,7 +173,7 @@
     },
     "_receiveShadows": false,
     "_shadowCastingMode": 0,
-    "_enableAutoBatch": false,
+    "_enableAutoBatch": true,
     "textures": [],
     "_id": ""
   },
@@ -194,7 +190,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "right",
+    "_name": "2",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -266,7 +262,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "c28a8ab6-5ba4-4504-8920-21642587fc3c"
+        "__uuid__": "f37c0c94-3d7b-4869-84ab-92364312f5f7"
       }
     ],
     "_mesh": {
@@ -274,7 +270,7 @@
     },
     "_receiveShadows": false,
     "_shadowCastingMode": 0,
-    "_enableAutoBatch": false,
+    "_enableAutoBatch": true,
     "textures": [],
     "_id": ""
   },
@@ -291,7 +287,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "front",
+    "_name": "3",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -363,7 +359,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "473bd55c-e88f-4ebc-b2ea-3ba69c1ac28e"
+        "__uuid__": "f37c0c94-3d7b-4869-84ab-92364312f5f7"
       }
     ],
     "_mesh": {
@@ -371,7 +367,7 @@
     },
     "_receiveShadows": false,
     "_shadowCastingMode": 0,
-    "_enableAutoBatch": false,
+    "_enableAutoBatch": true,
     "textures": [],
     "_id": ""
   },
@@ -388,7 +384,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "left",
+    "_name": "4",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -460,7 +456,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "34f3878d-668f-499a-9277-3356e8aa0376"
+        "__uuid__": "f37c0c94-3d7b-4869-84ab-92364312f5f7"
       }
     ],
     "_mesh": {
@@ -468,7 +464,7 @@
     },
     "_receiveShadows": false,
     "_shadowCastingMode": 0,
-    "_enableAutoBatch": false,
+    "_enableAutoBatch": true,
     "textures": [],
     "_id": ""
   },
@@ -485,7 +481,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "back",
+    "_name": "5",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -565,7 +561,7 @@
     },
     "_receiveShadows": false,
     "_shadowCastingMode": 0,
-    "_enableAutoBatch": false,
+    "_enableAutoBatch": true,
     "textures": [],
     "_id": ""
   },
@@ -582,7 +578,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "down",
+    "_name": "6",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -654,7 +650,7 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "826f5644-c0c7-418f-b0b8-681da93017c6"
+        "__uuid__": "f37c0c94-3d7b-4869-84ab-92364312f5f7"
       }
     ],
     "_mesh": {
@@ -662,7 +658,7 @@
     },
     "_receiveShadows": false,
     "_shadowCastingMode": 0,
-    "_enableAutoBatch": false,
+    "_enableAutoBatch": true,
     "textures": [],
     "_id": ""
   },
@@ -759,7 +755,7 @@
     },
     "_receiveShadows": false,
     "_shadowCastingMode": 0,
-    "_enableAutoBatch": false,
+    "_enableAutoBatch": true,
     "textures": [],
     "_id": ""
   },
@@ -773,34 +769,6 @@
     },
     "fileId": "5eYY5G+h5GwrzQ29rh2vO+",
     "sync": false
-  },
-  {
-    "__type__": "402defmy1xNR6or/0nZbjE9",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
-    "upFace": {
-      "__id__": 2
-    },
-    "downFace": {
-      "__id__": 17
-    },
-    "leftFace": {
-      "__id__": 11
-    },
-    "rightFace": {
-      "__id__": 5
-    },
-    "frontFace": {
-      "__id__": 8
-    },
-    "backFace": {
-      "__id__": 14
-    },
-    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",

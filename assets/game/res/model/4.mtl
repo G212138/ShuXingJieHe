@@ -1,6 +1,6 @@
 {
   "__type__": "cc.Material",
-  "_name": "1",
+  "_name": "left",
   "_objFlags": 0,
   "_native": "",
   "_effectAsset": {
@@ -13,9 +13,9 @@
       "props": {
         "diffuseColor": {
           "__type__": "cc.Color",
-          "r": 42,
-          "g": 130,
-          "b": 228,
+          "r": 121,
+          "g": 72,
+          "b": 234,
           "a": 255
         }
       }

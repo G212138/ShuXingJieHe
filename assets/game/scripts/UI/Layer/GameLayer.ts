@@ -3,7 +3,6 @@ import { ListenerManager } from "../../../../frame/scripts/Manager/ListenerManag
 import { SyncDataManager } from "../../../../frame/scripts/Manager/SyncDataManager";
 import { T2M } from "../../../../frame/scripts/SDK/T2M";
 import { EventType } from "../../Data/EventType";
-import Cube from "../Item/Cube";
 import GameUI from "../Item/GameUI";
 import ThreeNode from "../Item/ThreeDNode";
 
@@ -23,7 +22,7 @@ export default class GameLayer extends cc.Component {
     @property(cc.Node)
     private addMinus: cc.Node = null;
     @property(cc.Node)
-    private img_huangbian: cc.Node[] = [];
+    private img_huangbian: cc.Node = null;
 
     private touchEventId: number;
 
@@ -60,9 +59,6 @@ export default class GameLayer extends cc.Component {
 
     private onDragStart(data) {
         this.addMinus.active = false;
-        this.img_huangbian[0].active = false;
-        this.img_huangbian[1].active = false;
-        this.img_huangbian[2].active = false;
     }
 
     private onDragMove(data) {
@@ -85,13 +81,11 @@ export default class GameLayer extends cc.Component {
         let rotateByUp = Math.abs(dot) > Math.cos(cc.misc.degreesToRadians(45));
         if ( rotateByUp) {
             let angle = (disX / 2436 * 360);
-            // eulerY += angle
             cc.Quat.rotateAround(quat, quat, cc.Vec3.UP, cc.misc.degreesToRadians(angle))
             changed = true
         }
         if ( !rotateByUp) {
             let angle = -(disY / 2436 * 720);
-            // eulerX += angle
             cc.Quat.rotateAround(quat, quat, this.threeDCamera.right, cc.misc.degreesToRadians(angle))
             changed = true
         }
@@ -101,43 +95,25 @@ export default class GameLayer extends cc.Component {
             quat.toEuler(outEuler)
             this.onChangeBigCubeEuler(outEuler.x, outEuler.y, outEuler.z)
         }
-
-
-
-
-        // let dif = data.target.parent.convertToWorldSpaceAR(cc.v2(data.delta.x, data.delta.y));
-        // let q_tmp = new cc.Quat();
-        // let v_tmp = cc.v3(-dif.y, dif.x, 0);
-        // v_tmp.normalizeSelf();
-        // let eulerX = this.cubeRootNode.eulerAngles.x;
-        // let eulerY = this.cubeRootNode.eulerAngles.y;
-        // let eulerZ = this.cubeRootNode.eulerAngles.z;
-        // let quat = new cc.Quat()
-        // cc.Quat.fromEuler(quat, eulerX, eulerY, eulerZ)
-        // let out_Q = cc.Quat.rotateAround(q_tmp, quat, v_tmp, Math.PI * 0.007);
-        // this.cubeRootNode.setRotation(out_Q.x, out_Q.y, out_Q.z, out_Q.w);
     }
 
     private onDragEnd(data) {
         if (data.isClick) {
             this.addMinus.active = false;
-            this.img_huangbian[0].active = false;
-            this.img_huangbian[1].active = false;
-            this.img_huangbian[2].active = false;
         }
         this.node.position = cc.Vec3.ZERO;
-        if (data.isClick && SyncDataManager.getSyncData().customSyncData.enableClick) {
-            let pos = data.target.parent.convertToWorldSpaceAR(cc.v2(data.pos.x, data.pos.y));
-            let location = cc.v2(pos.x, pos.y);
-            let ray = this.threeDCamera.getComponent(cc.Camera).getRay(location);
-            let results = cc.geomUtils.intersect.raycast(this.cubeRootNode, ray, null, null);
-            for (let i = 0; i < results.length; i++) {
-                if (results[0].node.parent.getComponent(Cube) && results[1]) {
-                    results[0].node.parent.getComponent(Cube).clickCube(results[1].node.name);
-                }
-                return;
-            }
-        }
+        // if (data.isClick) {
+        //     let pos = data.target.parent.convertToWorldSpaceAR(cc.v2(data.pos.x, data.pos.y));
+        //     let location = cc.v2(pos.x, pos.y);
+        //     let ray = this.threeDCamera.getComponent(cc.Camera).getRay(location);
+        //     let results = cc.geomUtils.intersect.raycast(this.cubeRootNode, ray, null, null);
+        //     for (let i = 0; i < results.length; i++) {
+        //         if (results[0].node.parent.getComponent(Cube) && results[1]) {
+        //             results[0].node.parent.getComponent(Cube).clickCube(results[1].node.name);
+        //         }
+        //         return;
+        //     }
+        // }
 
         if (NetWork.isMaster || !NetWork.isSync) {
             let data = {

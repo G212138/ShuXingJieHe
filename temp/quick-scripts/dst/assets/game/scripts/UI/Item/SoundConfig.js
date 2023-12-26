@@ -22,7 +22,6 @@ var SoundConfig = /** @class */ (function () {
     /** --------------------------游戏通用配置---------------------------------- */
     SoundConfig.soudlist = {
         "点击音效": "点击音效",
-        "打孔音效": "打孔音效"
     };
     return SoundConfig;
 }());
@@ -39,4 +38,4 @@ cc._RF.pop();
                         });
                     }
                 })();
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFzc2V0c1xcZ2FtZVxcc2NyaXB0c1xcVUlcXEl0ZW1cXFNvdW5kQ29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQUFBO0lBQUE7SUFPQSxDQUFDO0lBTkcseUVBQXlFO0lBQzNELG9CQUFRLEdBQUc7UUFDckIsTUFBTSxFQUFFLE1BQU07UUFDZCxNQUFNLEVBQUUsTUFBTTtLQUNqQixDQUFBO0lBRUwsa0JBQUM7Q0FQRCxBQU9DLElBQUE7QUFQWSxrQ0FBVyIsImZpbGUiOiIiLCJzb3VyY2VSb290IjoiLyIsInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCBjbGFzcyBTb3VuZENvbmZpZyB7XG4gICAgLyoqIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t5ri45oiP6YCa55So6YWN572uLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSAqL1xuICAgIHB1YmxpYyBzdGF0aWMgc291ZGxpc3QgPSB7XG4gICAgICAgIFwi54K55Ye76Z+z5pWIXCI6IFwi54K55Ye76Z+z5pWIXCIsXG4gICAgICAgIFwi5omT5a2U6Z+z5pWIXCI6IFwi5omT5a2U6Z+z5pWIXCJcbiAgICB9XG5cbn0iXX0=
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFzc2V0c1xcZ2FtZVxcc2NyaXB0c1xcVUlcXEl0ZW1cXFNvdW5kQ29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQUFBO0lBQUE7SUFNQSxDQUFDO0lBTEcseUVBQXlFO0lBQzNELG9CQUFRLEdBQUc7UUFDckIsTUFBTSxFQUFFLE1BQU07S0FDakIsQ0FBQTtJQUVMLGtCQUFDO0NBTkQsQUFNQyxJQUFBO0FBTlksa0NBQVciLCJmaWxlIjoiIiwic291cmNlUm9vdCI6Ii8iLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgY2xhc3MgU291bmRDb25maWcge1xuICAgIC8qKiAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLea4uOaIj+mAmueUqOmFjee9ri0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0gKi9cbiAgICBwdWJsaWMgc3RhdGljIHNvdWRsaXN0ID0ge1xuICAgICAgICBcIueCueWHu+mfs+aViFwiOiBcIueCueWHu+mfs+aViFwiLFxuICAgIH1cblxufSJdfQ==

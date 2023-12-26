@@ -11,7 +11,6 @@ var SoundConfig = /** @class */ (function () {
     /** --------------------------游戏通用配置---------------------------------- */
     SoundConfig.soudlist = {
         "点击音效": "点击音效",
-        "打孔音效": "打孔音效"
     };
     return SoundConfig;
 }());

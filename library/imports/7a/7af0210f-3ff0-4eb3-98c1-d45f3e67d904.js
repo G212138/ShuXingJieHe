@@ -28,7 +28,6 @@ var ListenerManager_1 = require("../../../../frame/scripts/Manager/ListenerManag
 var SyncDataManager_1 = require("../../../../frame/scripts/Manager/SyncDataManager");
 var T2M_1 = require("../../../../frame/scripts/SDK/T2M");
 var EventType_1 = require("../../Data/EventType");
-var Cube_1 = require("../Item/Cube");
 var GameUI_1 = require("../Item/GameUI");
 var ThreeDNode_1 = require("../Item/ThreeDNode");
 var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
@@ -41,7 +40,7 @@ var GameLayer = /** @class */ (function (_super) {
         _this.threeDCamera = null;
         _this.cubeRootNode = null;
         _this.addMinus = null;
-        _this.img_huangbian = [];
+        _this.img_huangbian = null;
         return _this;
     }
     GameLayer.prototype.onLoad = function () {
@@ -72,9 +71,6 @@ var GameLayer = /** @class */ (function (_super) {
     };
     GameLayer.prototype.onDragStart = function (data) {
         this.addMinus.active = false;
-        this.img_huangbian[0].active = false;
-        this.img_huangbian[1].active = false;
-        this.img_huangbian[2].active = false;
     };
     GameLayer.prototype.onDragMove = function (data) {
         var pos = data.target.parent.convertToWorldSpaceAR(cc.v2(data.pos.x, data.pos.y));
@@ -94,13 +90,11 @@ var GameLayer = /** @class */ (function (_super) {
         var rotateByUp = Math.abs(dot) > Math.cos(cc.misc.degreesToRadians(45));
         if (rotateByUp) {
             var angle = (disX / 2436 * 360);
-            // eulerY += angle
             cc.Quat.rotateAround(quat, quat, cc.Vec3.UP, cc.misc.degreesToRadians(angle));
             changed = true;
         }
         if (!rotateByUp) {
             var angle = -(disY / 2436 * 720);
-            // eulerX += angle
             cc.Quat.rotateAround(quat, quat, this.threeDCamera.right, cc.misc.degreesToRadians(angle));
             changed = true;
         }
@@ -109,38 +103,24 @@ var GameLayer = /** @class */ (function (_super) {
             quat.toEuler(outEuler);
             this.onChangeBigCubeEuler(outEuler.x, outEuler.y, outEuler.z);
         }
-        // let dif = data.target.parent.convertToWorldSpaceAR(cc.v2(data.delta.x, data.delta.y));
-        // let q_tmp = new cc.Quat();
-        // let v_tmp = cc.v3(-dif.y, dif.x, 0);
-        // v_tmp.normalizeSelf();
-        // let eulerX = this.cubeRootNode.eulerAngles.x;
-        // let eulerY = this.cubeRootNode.eulerAngles.y;
-        // let eulerZ = this.cubeRootNode.eulerAngles.z;
-        // let quat = new cc.Quat()
-        // cc.Quat.fromEuler(quat, eulerX, eulerY, eulerZ)
-        // let out_Q = cc.Quat.rotateAround(q_tmp, quat, v_tmp, Math.PI * 0.007);
-        // this.cubeRootNode.setRotation(out_Q.x, out_Q.y, out_Q.z, out_Q.w);
     };
     GameLayer.prototype.onDragEnd = function (data) {
         if (data.isClick) {
             this.addMinus.active = false;
-            this.img_huangbian[0].active = false;
-            this.img_huangbian[1].active = false;
-            this.img_huangbian[2].active = false;
         }
         this.node.position = cc.Vec3.ZERO;
-        if (data.isClick && SyncDataManager_1.SyncDataManager.getSyncData().customSyncData.enableClick) {
-            var pos = data.target.parent.convertToWorldSpaceAR(cc.v2(data.pos.x, data.pos.y));
-            var location = cc.v2(pos.x, pos.y);
-            var ray = this.threeDCamera.getComponent(cc.Camera).getRay(location);
-            var results = cc.geomUtils.intersect.raycast(this.cubeRootNode, ray, null, null);
-            for (var i = 0; i < results.length; i++) {
-                if (results[0].node.parent.getComponent(Cube_1.default) && results[1]) {
-                    results[0].node.parent.getComponent(Cube_1.default).clickCube(results[1].node.name);
-                }
-                return;
-            }
-        }
+        // if (data.isClick) {
+        //     let pos = data.target.parent.convertToWorldSpaceAR(cc.v2(data.pos.x, data.pos.y));
+        //     let location = cc.v2(pos.x, pos.y);
+        //     let ray = this.threeDCamera.getComponent(cc.Camera).getRay(location);
+        //     let results = cc.geomUtils.intersect.raycast(this.cubeRootNode, ray, null, null);
+        //     for (let i = 0; i < results.length; i++) {
+        //         if (results[0].node.parent.getComponent(Cube) && results[1]) {
+        //             results[0].node.parent.getComponent(Cube).clickCube(results[1].node.name);
+        //         }
+        //         return;
+        //     }
+        // }
         if (NetWork_1.NetWork.isMaster || !NetWork_1.NetWork.isSync) {
             var data_1 = {
                 eulerX: SyncDataManager_1.SyncDataManager.getSyncData().customSyncData.eulerX,

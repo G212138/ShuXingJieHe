@@ -23,10 +23,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var ListenerManager_1 = require("../../../../frame/scripts/Manager/ListenerManager");
+var SoundManager_1 = require("../../../../frame/scripts/Manager/SoundManager");
 var SyncDataManager_1 = require("../../../../frame/scripts/Manager/SyncDataManager");
-var EventType_1 = require("../../Data/EventType");
-var Cube_1 = require("./Cube");
 var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
 var ThreeNode = /** @class */ (function (_super) {
     __extends(ThreeNode, _super);
@@ -34,43 +32,58 @@ var ThreeNode = /** @class */ (function (_super) {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.cubePrefab = null;
         _this.cubeRootNode = null;
+        _this.secondStepBigCube = [];
+        _this.sliderRotate = null;
+        _this.sliderMerge = null;
+        _this.firstStepNode = [];
+        _this.secondStepNode = [];
         return _this;
     }
     ThreeNode.prototype.onLoad = function () {
-        ListenerManager_1.ListenerManager.on(EventType_1.EventType.CUBE_OPEN, this.onCubeOpen, this);
-        ListenerManager_1.ListenerManager.on(EventType_1.EventType.CLICK_CUBE, this.onClickCube, this);
+        // for (let i = 0; i < 8 * 8 * 8; i++) {
+        //     let smallCubeNode = cc.instantiate(this.cubePrefab);
+        //     smallCubeNode.parent = this.cubeRootNode.getChildByName("firstStep");
+        //     smallCubeNode.opacity = 0;
+        //     this.firstStepNode.push(smallCubeNode);
+        // }
+        // for (let i = 0; i < 6; i++) {
+        //     this.secondStepNode.push([]);
+        //     for (let j = 0; j < 8 * 8 * 8; j++) {
+        //         let smallCubeNode2 = cc.instantiate(this.cubePrefab);
+        //         smallCubeNode2.parent = this.cubeRootNode.getChildByName("secondStep").getChildByName("secondStep_" + i);
+        //         smallCubeNode2.opacity = 0;
+        //         this.secondStepNode[i].push(smallCubeNode2);
+        //     }
+        // }
     };
     ThreeNode.prototype.onDestroy = function () {
-        ListenerManager_1.ListenerManager.off(EventType_1.EventType.CUBE_OPEN, this.onCubeOpen, this);
-        ListenerManager_1.ListenerManager.off(EventType_1.EventType.CLICK_CUBE, this.onClickCube, this);
     };
     ThreeNode.prototype.init = function () {
         this.initBigCube();
-        this.onCubeOpen(SyncDataManager_1.SyncDataManager.getSyncData().customSyncData.cubeOpened);
-        for (var i = 0; i < SyncDataManager_1.SyncDataManager.getSyncData().customSyncData.cubeClickArr.length; i++) {
-            this.onClickCube(SyncDataManager_1.SyncDataManager.getSyncData().customSyncData.cubeClickArr[i]);
-        }
+    };
+    ThreeNode.prototype.showStep2 = function () {
+        this.cubeRootNode.getChildByName("firstStep").opacity = 0;
+        this.cubeRootNode.getChildByName("secondStep").opacity = 255;
+        this.showSecondStep();
     };
     ThreeNode.prototype.reset = function () {
         var quat = new cc.Quat();
-        cc.Quat.fromEuler(quat, 0, 45, 0);
+        cc.Quat.fromEuler(quat, 0, -15, 0);
         this.cubeRootNode.setRotation(quat);
         this.initBigCube();
-        SyncDataManager_1.SyncDataManager.getSyncData().customSyncData.cubeClickArr = [];
-        SyncDataManager_1.SyncDataManager.getSyncData().customSyncData.cubeOpened = false;
-        SyncDataManager_1.SyncDataManager.getSyncData().customSyncData.qiepianClickArr = [];
     };
     //初始化大正方体
     ThreeNode.prototype.initBigCube = function () {
-        var xCount = SyncDataManager_1.SyncDataManager.getSyncData().customSyncData.xCount;
-        var yCount = SyncDataManager_1.SyncDataManager.getSyncData().customSyncData.yCount;
-        var zCount = SyncDataManager_1.SyncDataManager.getSyncData().customSyncData.zCount;
-        this.changeBigCubeSize(xCount, yCount, zCount);
+        this.changeBigCubeSize();
     };
-    ThreeNode.prototype.changeBigCubeSize = function (xCount, yCount, zCount) {
-        //先清空
-        this.cubeRootNode.removeAllChildren();
-        //创建xCount行yCount列zCount层的大正方体，并且以大正方体的中心点为原点
+    ThreeNode.prototype.changeBigCubeSize = function () {
+        var count = SyncDataManager_1.SyncDataManager.getSyncData().customSyncData.count;
+        this.cubeRootNode.getChildByName("firstStep").opacity = 255;
+        this.cubeRootNode.getChildByName("secondStep").opacity = 0;
+        this.cubeRootNode.getChildByName("firstStep").children.forEach(function (element) {
+            element.opacity = 0;
+        });
+        //立方体的层数为count，例：count=3，立方体最上层为1*1，下一层为2*2,最下层为3*3
         var cubeWidth = 1;
         var cubeHeight = 1;
         var cubeLength = 1;
@@ -78,70 +91,235 @@ var ThreeNode = /** @class */ (function (_super) {
         var cubeXDis = cubeWidth + cubeDis;
         var cubeYDis = cubeHeight + cubeDis;
         var cubeZDis = cubeLength + cubeDis;
-        var cubeXCount = xCount;
-        var cubeYCount = yCount;
-        var cubeZCount = zCount;
-        var cubeXTotalDis = cubeXCount * cubeXDis;
-        var cubeYTotalDis = cubeYCount * cubeYDis;
-        var cubeZTotalDis = cubeZCount * cubeZDis;
-        var cubeXStart = -cubeXTotalDis / 2 + cubeXDis / 2;
-        var cubeYStart = -cubeYTotalDis / 2 + cubeYDis / 2;
-        var cubeZStart = -cubeZTotalDis / 2 + cubeZDis / 2;
-        for (var i = 0; i < cubeXCount; i++) {
-            for (var j = 0; j < cubeYCount; j++) {
-                for (var k = 0; k < cubeZCount; k++) {
-                    var cubeNode = cc.instantiate(this.cubePrefab);
-                    cubeNode.parent = this.cubeRootNode;
-                    cubeNode.setPosition(cubeXStart + i * cubeXDis, cubeYStart + j * cubeYDis, cubeZStart + k * cubeZDis);
-                    cubeNode.getComponent(Cube_1.default).init(i, j, k);
+        var cubeStartX = -count * cubeXDis / 2 + cubeXDis / 2;
+        for (var i = 0; i < count; i++) {
+            for (var j = 0; j < count - i; j++) {
+                for (var k = 0; k < count - i; k++) {
+                    var smallCubeNode = this.firstStepNode[i * count * count + j * count + k];
+                    if (!smallCubeNode) {
+                        smallCubeNode = cc.instantiate(this.cubePrefab);
+                        smallCubeNode.parent = this.cubeRootNode.getChildByName("firstStep");
+                        this.firstStepNode.push(smallCubeNode);
+                    }
+                    // smallCubeNode.parent = this.cubeRootNode.getChildByName("firstStep");
+                    smallCubeNode.opacity = 255;
+                    smallCubeNode.setPosition(cubeStartX + j * cubeYDis, cubeStartX + i * cubeXDis, cubeStartX + k * cubeZDis);
                 }
             }
         }
+        this.cubeRootNode.getChildByName("firstStep").scale = 1 + (8 - count) * 0.15;
     };
-    ThreeNode.prototype.onCubeOpen = function (isOpen) {
-        if (isOpen) {
-            //将大正方体的按层分开一定距离
-            var cubeWidth = 1;
-            var cubeHeight = 1;
-            var cubeLength = 1;
-            var cubeDis = 0.8;
-            var cubeXDis = cubeWidth;
-            var cubeYDis = cubeHeight + cubeDis;
-            var cubeZDis = cubeLength;
-            var cubeXCount = SyncDataManager_1.SyncDataManager.getSyncData().customSyncData.xCount;
-            var cubeYCount = SyncDataManager_1.SyncDataManager.getSyncData().customSyncData.yCount;
-            var cubeZCount = SyncDataManager_1.SyncDataManager.getSyncData().customSyncData.zCount;
-            var cubeXTotalDis = cubeXCount * cubeXDis;
-            var cubeYTotalDis = cubeYCount * cubeYDis;
-            var cubeZTotalDis = cubeZCount * cubeZDis;
-            var cubeXStart = -cubeXTotalDis / 2 + cubeXDis / 2;
-            var cubeYStart = -cubeYTotalDis / 2 + cubeYDis / 2;
-            var cubeZStart = -cubeZTotalDis / 2 + cubeZDis / 2;
-            var openPosArr = [];
-            for (var i = 0; i < cubeXCount; i++) {
-                for (var j = 0; j < cubeYCount; j++) {
-                    for (var k = 0; k < cubeZCount; k++) {
-                        openPosArr.push({ x: cubeXStart + i * cubeXDis, y: cubeYStart + j * cubeYDis, z: cubeZStart + k * cubeZDis });
+    ThreeNode.prototype.showSecondStep = function () {
+        var colorArr = ["#2A82E4", "#E329AE", "#43CF7C", "#7948EA", "#FFC300", "#FF8D1A"];
+        var count = SyncDataManager_1.SyncDataManager.getSyncData().customSyncData.count;
+        this.cubeRootNode.getChildByName("firstStep").opacity = 0;
+        this.cubeRootNode.getChildByName("secondStep").opacity = 255;
+        this.secondStepBigCube.forEach(function (cube) {
+            cube.children.forEach(function (node) {
+                node.opacity = 0;
+            });
+        });
+        var cubeWidth = 1;
+        var cubeHeight = 1;
+        var cubeLength = 1;
+        var cubeDis = 0;
+        var cubeXDis = cubeWidth + cubeDis;
+        var cubeYDis = cubeHeight + cubeDis;
+        var cubeZDis = cubeLength + cubeDis;
+        var cubeStartX = -count * cubeXDis / 2 + cubeXDis / 2;
+        this.secondStepBigCube[0].parent.y = 5;
+        this.secondStepBigCube[3].parent.y = -5;
+        for (var index = 0; index < 6; index++) {
+            var node = this.secondStepBigCube[index];
+            node.scale = 1 + (8 - count) * 0.15;
+            node.is3DNode = true;
+            if (index == 3 || index == 1 || index == 5) {
+                node.eulerAngles = cc.v3(0, -90, 0);
+            }
+            //分成两行三列，居中
+            var row = Math.floor(index / 3);
+            var col = index % 3;
+            var posX = 0;
+            var posY = 0;
+            // if (row == 0) {
+            //     posY = 5;
+            // } else {
+            //     posY = -5;
+            // }
+            if (col == 0) {
+                posX = -10;
+            }
+            else if (col == 1) {
+                posX = 0;
+            }
+            else {
+                posX = 10;
+            }
+            node.setPosition(posX, 0, 0);
+            if (!this.secondStepNode[index]) {
+                this.secondStepNode[index] = [];
+            }
+            for (var i = 0; i < count; i++) {
+                for (var j = 0; j < count - i; j++) {
+                    for (var k = 0; k < count - i; k++) {
+                        var smallCubeNode = this.secondStepNode[index][i * count * count + j * count + k];
+                        if (!smallCubeNode) {
+                            smallCubeNode = cc.instantiate(this.cubePrefab);
+                            smallCubeNode.parent = node;
+                            this.secondStepNode[index].push(smallCubeNode);
+                        }
+                        smallCubeNode.opacity = 255;
+                        smallCubeNode.setPosition(cubeStartX + j * cubeYDis, cubeStartX + i * cubeXDis, cubeStartX + k * cubeZDis);
+                        for (var face = 0; face < 6; face++) {
+                            var faceNode = smallCubeNode.getChildByName((face + 1).toString());
+                            var material = faceNode.getComponent(cc.MeshRenderer).getMaterial(0);
+                            var color = cc.Color.WHITE.fromHEX(colorArr[index]);
+                            material.setProperty("diffuseColor", color, 0);
+                        }
                     }
                 }
             }
-            for (var i = 0; i < this.cubeRootNode.children.length; i++) {
-                var cubeNode = this.cubeRootNode.children[i];
-                cubeNode.getComponent(Cube_1.default).handleOpen(openPosArr[i]);
-            }
-        }
-        else {
-            for (var i = 0; i < this.cubeRootNode.children.length; i++) {
-                var cubeNode = this.cubeRootNode.children[i];
-                cubeNode.getComponent(Cube_1.default).handleClose();
-            }
         }
     };
-    ThreeNode.prototype.onClickCube = function (data) {
-        for (var i = 0; i < this.cubeRootNode.children.length; i++) {
-            var cubeNode = this.cubeRootNode.children[i];
-            cubeNode.getComponent(Cube_1.default).handleCubeClick(data);
+    ThreeNode.prototype.rotation = function () {
+        var count = SyncDataManager_1.SyncDataManager.getSyncData().customSyncData.count;
+        var scale = 1 + (8 - count) * 0.15;
+        var node_0 = this.secondStepBigCube[0];
+        node_0.is3DNode = true;
+        cc.tween(node_0).to(1, { eulerAngles: cc.v3(-90, 0, 0), z: scale }).start();
+        var node_1 = this.secondStepBigCube[1];
+        node_1.is3DNode = true;
+        cc.tween(node_1).to(1, { eulerAngles: cc.v3(180, -90, 0) }).start();
+        var node_2 = this.secondStepBigCube[2];
+        node_2.is3DNode = true;
+        cc.tween(node_2).to(1, { eulerAngles: cc.v3(0, 0, 90), y: -scale }).start();
+        var node_3 = this.secondStepBigCube[3];
+        node_3.is3DNode = true;
+        cc.tween(node_3).to(1, { eulerAngles: cc.v3(90, 90, 0), z: scale }).start();
+        var node_4 = this.secondStepBigCube[4];
+        node_4.is3DNode = true;
+        cc.tween(node_4).to(1, { eulerAngles: cc.v3(0, 180, 0), y: -scale, z: scale }).start();
+        var node_5 = this.secondStepBigCube[5];
+        node_5.is3DNode = true;
+        cc.tween(node_5).to(1, { eulerAngles: cc.v3(0, -90, -90), y: -scale }).start();
+        var slider = this.sliderRotate.getComponent(cc.Slider);
+        cc.tween(slider).to(1, { progress: 1 }).start();
+    };
+    ThreeNode.prototype.merge = function () {
+        var slider = this.sliderMerge.getComponent(cc.Slider);
+        cc.tween(slider).to(5, { progress: 1 }).start();
+        var node_0 = this.secondStepBigCube[0];
+        var node_1 = this.secondStepBigCube[1];
+        var node_2 = this.secondStepBigCube[2];
+        var node_3 = this.secondStepBigCube[3];
+        var node_4 = this.secondStepBigCube[4];
+        var node_5 = this.secondStepBigCube[5];
+        var count = SyncDataManager_1.SyncDataManager.getSyncData().customSyncData.count;
+        var scale = 1 + (8 - count) * 0.15;
+        SoundManager_1.SoundManager.stopSoundByName("移动");
+        SoundManager_1.SoundManager.playEffect("移动", false);
+        cc.tween(node_0).to(1, { x: 0 }).call(function () {
+            SoundManager_1.SoundManager.stopSoundByName("拼");
+            SoundManager_1.SoundManager.playEffect("拼", false, false);
+            SoundManager_1.SoundManager.stopSoundByName("移动");
+            SoundManager_1.SoundManager.playEffect("移动", false, false);
+            cc.tween(node_2).to(1, { x: 0, y: -scale }).call(function () {
+                SoundManager_1.SoundManager.stopSoundByName("拼");
+                SoundManager_1.SoundManager.playEffect("拼", false, false);
+                SoundManager_1.SoundManager.stopSoundByName("移动");
+                SoundManager_1.SoundManager.playEffect("移动", false, false);
+                cc.tween(node_3).to(1, { x: 0 }).call(function () {
+                    SoundManager_1.SoundManager.stopSoundByName("拼");
+                    SoundManager_1.SoundManager.playEffect("拼", false, false);
+                    SoundManager_1.SoundManager.stopSoundByName("移动");
+                    SoundManager_1.SoundManager.playEffect("移动", false, false);
+                    cc.tween(node_5).to(1, { x: 0 }).call(function () {
+                        SoundManager_1.SoundManager.stopSoundByName("拼");
+                        SoundManager_1.SoundManager.playEffect("拼", false, false);
+                        SoundManager_1.SoundManager.stopSoundByName("移动");
+                        SoundManager_1.SoundManager.playEffect("移动", false, false);
+                        cc.tween(node_0.parent).to(1, { y: Math.floor(count / 2) * scale }).call(function () {
+                        }).start();
+                        cc.tween(node_3.parent).to(1, { y: -Math.floor(count / 2) * scale }).call(function () {
+                            SoundManager_1.SoundManager.stopSoundByName("拼");
+                            SoundManager_1.SoundManager.playEffect("拼", false, false);
+                        }).start();
+                    }).start();
+                }).start();
+            }).start();
+        }).start();
+    };
+    ThreeNode.prototype.controlRotate = function (progress) {
+        this.stopAllTween();
+        this.secondStepBigCube[0].eulerAngles = cc.v3(-90 * progress, 0, 0);
+        this.secondStepBigCube[1].eulerAngles = cc.v3(180 * progress, -90, 0);
+        this.secondStepBigCube[2].eulerAngles = cc.v3(0, 0, 90 * progress);
+        this.secondStepBigCube[3].eulerAngles = cc.v3(90 * progress, -90 * (1 - progress) + 90 * progress, 0);
+        this.secondStepBigCube[4].eulerAngles = cc.v3(0, 180 * progress, 0);
+        this.secondStepBigCube[5].eulerAngles = cc.v3(0, -90, -90 * progress);
+    };
+    ThreeNode.prototype.controlMerge = function (progress) {
+        this.stopAllTween();
+        var count = SyncDataManager_1.SyncDataManager.getSyncData().customSyncData.count;
+        var scale = 1 + (8 - count) * 0.15;
+        if (progress * 5 < 1) {
+            this.secondStepBigCube[0].parent.y = 5;
+            this.secondStepBigCube[3].parent.y = -5;
+            this.secondStepBigCube[0].x = -10 * (1 - progress * 5);
+            this.secondStepBigCube[0].z = scale;
+            this.secondStepBigCube[1].position = cc.v3(0, 0, 0);
+            this.secondStepBigCube[2].x = 10;
+            this.secondStepBigCube[2].y = -scale;
+            this.secondStepBigCube[3].x = -10;
+            this.secondStepBigCube[3].z = scale;
+            this.secondStepBigCube[4].y = -scale;
+            this.secondStepBigCube[4].z = scale;
+            this.secondStepBigCube[5].x = 10;
+            this.secondStepBigCube[5].y = -scale;
         }
+        else if (progress * 5 < 2) {
+            this.secondStepBigCube[0].parent.y = 5;
+            this.secondStepBigCube[3].parent.y = -5;
+            this.secondStepBigCube[0].x = 0;
+            this.secondStepBigCube[0].z = scale;
+            this.secondStepBigCube[1].position = cc.v3(0, 0, 0);
+        }
+        else if (progress * 5 < 3) {
+            this.secondStepBigCube[0].parent.y = 5;
+            this.secondStepBigCube[3].parent.y = -5;
+            this.secondStepBigCube[0].x = 0;
+            this.secondStepBigCube[0].z = scale;
+            this.secondStepBigCube[1].position = cc.v3(0, 0, 0);
+        }
+        else if (progress * 5 < 4) {
+            this.secondStepBigCube[0].parent.y = 5;
+            this.secondStepBigCube[3].parent.y = -5;
+            this.secondStepBigCube[0].x = 0;
+            this.secondStepBigCube[0].z = scale;
+            this.secondStepBigCube[1].position = cc.v3(0, 0, 0);
+        }
+        else {
+            this.secondStepBigCube[0].x = 0;
+            this.secondStepBigCube[0].z = scale;
+            this.secondStepBigCube[1].position = cc.v3(0, 0, 0);
+            this.secondStepBigCube[2].x = 0;
+            this.secondStepBigCube[2].y = -scale;
+            this.secondStepBigCube[3].x = 0;
+            this.secondStepBigCube[3].z = scale;
+            this.secondStepBigCube[4].y = -scale;
+            this.secondStepBigCube[4].z = scale;
+            this.secondStepBigCube[5].x = 0;
+            this.secondStepBigCube[5].y = -scale;
+        }
+    };
+    ThreeNode.prototype.stopAllTween = function () {
+        this.secondStepBigCube.forEach(function (cube) {
+            cc.Tween.stopAllByTarget(cube);
+        });
+        cc.Tween.stopAllByTarget(this.secondStepBigCube[0].parent);
+        cc.Tween.stopAllByTarget(this.secondStepBigCube[3].parent);
+        cc.Tween.stopAllByTarget(this.sliderRotate.getComponent(cc.Slider));
+        cc.Tween.stopAllByTarget(this.sliderMerge.getComponent(cc.Slider));
     };
     __decorate([
         property(cc.Prefab)
@@ -149,6 +327,15 @@ var ThreeNode = /** @class */ (function (_super) {
     __decorate([
         property(cc.Node)
     ], ThreeNode.prototype, "cubeRootNode", void 0);
+    __decorate([
+        property(cc.Node)
+    ], ThreeNode.prototype, "secondStepBigCube", void 0);
+    __decorate([
+        property(cc.Node)
+    ], ThreeNode.prototype, "sliderRotate", void 0);
+    __decorate([
+        property(cc.Node)
+    ], ThreeNode.prototype, "sliderMerge", void 0);
     ThreeNode = __decorate([
         ccclass
     ], ThreeNode);
