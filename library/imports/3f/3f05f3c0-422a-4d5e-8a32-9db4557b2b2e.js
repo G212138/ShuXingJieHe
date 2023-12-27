@@ -88,13 +88,13 @@ var GameUI = /** @class */ (function (_super) {
         SoundManager_1.SoundManager.playEffect(SoundConfig_1.SoundConfig.soudlist["点击音效"], false, false);
         this.addMinus.active = false;
         this.threeDNode.showStep2();
-        this.node.getChildByName("btnCopy").getChildByName("disable").active = true;
+        // this.node.getChildByName("btnCopy").getChildByName("disable").active = true;
     };
     GameUI.prototype.onClickRotate = function () {
         SoundManager_1.SoundManager.stopSoundByName(SoundConfig_1.SoundConfig.soudlist["点击音效"]);
         SoundManager_1.SoundManager.playEffect(SoundConfig_1.SoundConfig.soudlist["点击音效"], false, false);
         this.addMinus.active = false;
-        this.node.getChildByName("btnRotate").getChildByName("disable").active = true;
+        // this.node.getChildByName("btnRotate").getChildByName("disable").active = true;
         this.threeDNode.rotation();
         this.sliderRotate.active = true;
     };
@@ -102,7 +102,7 @@ var GameUI = /** @class */ (function (_super) {
         SoundManager_1.SoundManager.stopSoundByName(SoundConfig_1.SoundConfig.soudlist["点击音效"]);
         SoundManager_1.SoundManager.playEffect(SoundConfig_1.SoundConfig.soudlist["点击音效"], false, false);
         this.addMinus.active = false;
-        this.node.getChildByName("btnMerge").getChildByName("disable").active = true;
+        // this.node.getChildByName("btnMerge").getChildByName("disable").active = true;
         this.threeDNode.merge();
         this.sliderMerge.active = true;
     };
@@ -113,6 +113,15 @@ var GameUI = /** @class */ (function (_super) {
     GameUI.prototype.onSlideMerge = function (event) {
         var progress = event.progress;
         this.threeDNode.controlMerge(progress);
+    };
+    GameUI.prototype.onClickShowZuoBiao = function () {
+        this.threeDNode.reset();
+        // this.node.getChildByName("btnZuobiao").getChildByName("disable").active = true;
+        // let zuobiao_node = this.node.getChildByName("zuobiao_node");
+        // zuobiao_node.active = true;
+        // let zuobiao_top = zuobiao_node.getChildByName("top");
+        // let count = SyncDataManager.getSyncData().customSyncData.count;
+        // zuobiao_top.y = count * 80;
     };
     __decorate([
         property(ThreeDNode_1.default)

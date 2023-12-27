@@ -127,6 +127,7 @@ var GameLayer = /** @class */ (function (_super) {
                 eulerY: SyncDataManager_1.SyncDataManager.getSyncData().customSyncData.eulerY,
                 eulerZ: SyncDataManager_1.SyncDataManager.getSyncData().customSyncData.eulerZ
             };
+            console.log("onDragEnd", data_1);
             T2M_1.T2M.dispatch(EventType_1.EventType.DRAG_END, data_1);
         }
     };

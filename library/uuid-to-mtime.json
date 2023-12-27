@@ -45,8 +45,8 @@
     "relativePath": "game\\scripts"
   },
   "1babe9ab-342f-433c-9c4e-e9aa15e61eb4": {
-    "asset": 1702881650843,
-    "meta": 1702882433763,
+    "asset": 1703583282513,
+    "meta": 1703644747103,
     "relativePath": "resources\\audios"
   },
   "39c9aeab-df8f-42bf-9a91-bbb835fdfeb5": {
@@ -145,8 +145,8 @@
     "relativePath": "game\\res\\material"
   },
   "d058bd51-4ba4-4090-b108-7cae468a29a9": {
-    "asset": 1702881650375,
-    "meta": 1702882433791,
+    "asset": 1703572628132,
+    "meta": 1703644747105,
     "relativePath": "game\\res\\model"
   },
   "0160b973-ec9f-4058-8406-a6780368aa93": {
@@ -175,8 +175,8 @@
     "relativePath": "game\\scripts\\Data"
   },
   "89961b4d-39d7-4f2c-a066-3fd305fe6a74": {
-    "asset": 1702881650598,
-    "meta": 1702882433797,
+    "asset": 1703573537723,
+    "meta": 1703644747106,
     "relativePath": "game\\scripts\\Manager"
   },
   "b17bd33a-fc59-48f1-a445-76aa70997be5": {
@@ -1725,8 +1725,8 @@
     "relativePath": "game\\scripts\\Components\\DragSync.ts"
   },
   "32f855fb-ac45-4a70-9924-652cc84cf88d": {
-    "asset": 1703584796734,
-    "meta": 1703584796745,
+    "asset": 1703671427214,
+    "meta": 1703671427231,
     "relativePath": "resources\\prefab\\ui\\panel\\GamePanel.prefab"
   },
   "62af3dd2-526f-4df6-81ef-c3b28cf4a879": {
@@ -1794,11 +1794,6 @@
     "meta": 1699339560021,
     "relativePath": "frame\\scripts\\Http\\NetWork.ts"
   },
-  "7af0210f-3ff0-4eb3-98c1-d45f3e67d904": {
-    "asset": 1703494390805,
-    "meta": 1703494392124,
-    "relativePath": "game\\scripts\\UI\\Layer\\GameLayer.ts"
-  },
   "f6665ca6-d089-4935-82aa-e1d6bf4c79b0": {
     "asset": 1703576087401,
     "meta": 1703576088487,
@@ -1819,14 +1814,19 @@
     "meta": 1703583338826,
     "relativePath": "game\\scripts\\UI\\Item\\SoundConfig.ts"
   },
+  "7af0210f-3ff0-4eb3-98c1-d45f3e67d904": {
+    "asset": 1703661770522,
+    "meta": 1703661771256,
+    "relativePath": "game\\scripts\\UI\\Layer\\GameLayer.ts"
+  },
   "3f05f3c0-422a-4d5e-8a32-9db4557b2b2e": {
-    "asset": 1703585422477,
-    "meta": 1703585567379,
+    "asset": 1703669534373,
+    "meta": 1703669535036,
     "relativePath": "game\\scripts\\UI\\Item\\GameUI.ts"
   },
   "888f772b-9980-4fa7-9a70-1c7126200e95": {
-    "asset": 1703587770032,
-    "meta": 1703587775404,
+    "asset": 1703672355379,
+    "meta": 1703672356275,
     "relativePath": "game\\scripts\\UI\\Item\\ThreeDNode.ts"
   }
 }

@@ -56,9 +56,77 @@ export default class ThreeNode extends cc.Component {
 
     public reset() {
         let quat = new cc.Quat()
-        cc.Quat.fromEuler(quat, 0, -15, 0)
+        cc.Quat.fromEuler(quat, 15, -25, -5)
         this.cubeRootNode.setRotation(quat);
-        this.initBigCube();
+        // this.initBigCube();
+
+        // let topPos = cc.v3(0, 0, 0);
+        // let rightPos = cc.v3(0, 0, 0);
+        // let bottomPos = cc.v3(0, 0, 0);
+        // let topWidth = 0;
+        // let rightHeight = 0;
+        // let bottomHeight = 0;
+        // switch (SyncDataManager.getSyncData().customSyncData.count) {
+        //     case 2:
+        //         topPos = cc.v3(25, 155, 0);
+        //         rightPos = cc.v3(147, 0, 0);
+        //         bottomPos = cc.v3(0, -155, 0);
+        //         topWidth = 107;
+        //         rightHeight = 240;
+        //         bottomHeight = 180;
+        //         break;
+        //     case 3:
+        //         break;
+        //     case 4:
+        //         break;
+        //     case 5:
+        //         break;
+        //     case 6:
+        //         break;
+        //     case 7:
+        //         break;
+        //     case 8:
+        //         break;
+        // }
+
+        let count = SyncDataManager.getSyncData().customSyncData.count;
+        let scale = 1 + (8 - count) * 0.15;
+        let cubeStartX = -count / 2;
+
+        let zuobiao_node = this.node.getChildByName("zuobiao_node");
+
+        zuobiao_node.active = true;
+        let top = zuobiao_node.getChildByName("top");
+        top.width = (count * scale / 0.03) * 0.85;
+        top.setRotation(quat);
+        top.y = count * scale / 0.03 + 30;
+        top.x = cubeStartX + top.width / 4 - 1;
+        top.getChildByName("lbl_count").getComponent(cc.Label).string = count.toString();
+        top.getChildByName("line_1").width = top.width / 2 - 30;
+        top.getChildByName("line_2").width = top.width / 2 - 30;
+        // console.log("top.width", top.width);
+        // console.log("top.pos", top.position);
+
+        let right = zuobiao_node.getChildByName("right");
+        right.height = ((2 * count + 1) * scale / 0.03) * 0.75 ;
+        right.x = count * scale / 0.03 + (count > 2 ? 0 : count * 10);
+        right.y = count * 5;
+        right.getChildByName("lbl_count").getComponent(cc.Label).string = "(" + count + "x2+1)";
+        right.getChildByName("line_1").height = right.height / 2 - 30;
+        right.getChildByName("line_2").height = right.height / 2 - 30;
+        // console.log("right.height", right.height);
+        // console.log("right.pos", right.position);
+
+        let bottom = zuobiao_node.getChildByName("bottom");
+        bottom.height = ((2 * count + 1) * scale / 0.03) * 0.45 - count * 5;
+        bottom.x = count * scale / 0.03 -(count *10);
+        bottom.y = -count * scale / 0.03 -((count) *10) - (count < 5?bottom.height / count : -2*count);
+        bottom.getChildByName("line_1").height = bottom.height / 2 - 30;
+        bottom.getChildByName("line_2").height = bottom.height / 2 - 30;
+        bottom.getChildByName("lbl_count").getComponent(cc.Label).string = "(" + count + "+1)";
+        let bottomquat = new cc.Quat()
+        cc.Quat.fromEuler(bottomquat, 0, 0, -5 * scale - 10)
+        bottom.setRotation(bottomquat);
     }
 
     //初始化大正方体
@@ -275,7 +343,7 @@ export default class ThreeNode extends cc.Component {
         this.stopAllTween();
         let count = SyncDataManager.getSyncData().customSyncData.count;
         let scale = 1 + (8 - count) * 0.15;
-        if (progress * 5 < 1) {
+        if (progress * 5 <= 1) {
             this.secondStepBigCube[0].parent.y = 5;
             this.secondStepBigCube[3].parent.y = -5;
 
@@ -295,7 +363,7 @@ export default class ThreeNode extends cc.Component {
 
             this.secondStepBigCube[5].x = 10;
             this.secondStepBigCube[5].y = -scale;
-        } else if (progress * 5 < 2) {
+        } else if (progress * 5 <= 2) {
             this.secondStepBigCube[0].parent.y = 5;
             this.secondStepBigCube[3].parent.y = -5;
 
@@ -304,7 +372,18 @@ export default class ThreeNode extends cc.Component {
 
             this.secondStepBigCube[1].position = cc.v3(0, 0, 0);
 
-        } else if (progress * 5 < 3) {
+            this.secondStepBigCube[2].x = 10 * (2 - progress * 5);
+            this.secondStepBigCube[2].y = -scale;
+
+            this.secondStepBigCube[3].x = -10;
+            this.secondStepBigCube[3].z = scale;
+
+            this.secondStepBigCube[4].y = -scale;
+            this.secondStepBigCube[4].z = scale;
+
+            this.secondStepBigCube[5].x = 10;
+            this.secondStepBigCube[5].y = -scale;
+        } else if (progress * 5 <= 3) {
             this.secondStepBigCube[0].parent.y = 5;
             this.secondStepBigCube[3].parent.y = -5;
 
@@ -312,7 +391,19 @@ export default class ThreeNode extends cc.Component {
             this.secondStepBigCube[0].z = scale;
 
             this.secondStepBigCube[1].position = cc.v3(0, 0, 0);
-        } else if (progress * 5 < 4) {
+
+            this.secondStepBigCube[2].x = 0;
+            this.secondStepBigCube[2].y = -scale;
+
+            this.secondStepBigCube[3].x = -10 * (3 - progress * 5);
+            this.secondStepBigCube[3].z = scale;
+
+            this.secondStepBigCube[4].y = -scale;
+            this.secondStepBigCube[4].z = scale;
+
+            this.secondStepBigCube[5].x = 10;
+            this.secondStepBigCube[5].y = -scale;
+        } else if (progress * 5 <= 4) {
             this.secondStepBigCube[0].parent.y = 5;
             this.secondStepBigCube[3].parent.y = -5;
 
@@ -320,6 +411,18 @@ export default class ThreeNode extends cc.Component {
             this.secondStepBigCube[0].z = scale;
 
             this.secondStepBigCube[1].position = cc.v3(0, 0, 0);
+
+            this.secondStepBigCube[2].x = 0;
+            this.secondStepBigCube[2].y = -scale;
+
+            this.secondStepBigCube[3].x = 0;
+            this.secondStepBigCube[3].z = scale;
+
+            this.secondStepBigCube[4].y = -scale;
+            this.secondStepBigCube[4].z = scale;
+
+            this.secondStepBigCube[5].x = 10 * (4 - progress * 5);
+            this.secondStepBigCube[5].y = -scale;
         } else {
             this.secondStepBigCube[0].x = 0;
             this.secondStepBigCube[0].z = scale;
@@ -339,6 +442,9 @@ export default class ThreeNode extends cc.Component {
             this.secondStepBigCube[5].x = 0;
             this.secondStepBigCube[5].y = -scale;
 
+            let offset = Math.floor(count / 2) * scale * (5 - progress * 5) > 0 ? Math.floor(count / 2) * scale * (5 - progress * 5) : 0;
+            this.secondStepBigCube[0].parent.y = Math.floor(count / 2) * scale + offset > 5 ? 5 : Math.floor(count / 2) * scale + offset;
+            this.secondStepBigCube[3].parent.y = -Math.floor(count / 2) * scale - offset < -5 ? -5 : -Math.floor(count / 2) * scale - offset;
         }
     }
 

@@ -121,6 +121,7 @@ export default class GameLayer extends cc.Component {
                 eulerY: SyncDataManager.getSyncData().customSyncData.eulerY,
                 eulerZ: SyncDataManager.getSyncData().customSyncData.eulerZ
             }
+            console.log("onDragEnd", data);
             T2M.dispatch(EventType.DRAG_END, data);
         }
     }

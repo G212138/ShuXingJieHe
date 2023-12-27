@@ -78,14 +78,14 @@ export default class GameUI extends cc.Component {
         SoundManager.playEffect(SoundConfig.soudlist["点击音效"], false, false);
         this.addMinus.active = false;
         this.threeDNode.showStep2();
-        this.node.getChildByName("btnCopy").getChildByName("disable").active = true;
+        // this.node.getChildByName("btnCopy").getChildByName("disable").active = true;
     }
 
     private onClickRotate() {
         SoundManager.stopSoundByName(SoundConfig.soudlist["点击音效"]);
         SoundManager.playEffect(SoundConfig.soudlist["点击音效"], false, false);
         this.addMinus.active = false;
-        this.node.getChildByName("btnRotate").getChildByName("disable").active = true;
+        // this.node.getChildByName("btnRotate").getChildByName("disable").active = true;
         this.threeDNode.rotation();
         this.sliderRotate.active = true;
     }
@@ -94,7 +94,7 @@ export default class GameUI extends cc.Component {
         SoundManager.stopSoundByName(SoundConfig.soudlist["点击音效"]);
         SoundManager.playEffect(SoundConfig.soudlist["点击音效"], false, false);
         this.addMinus.active = false;
-        this.node.getChildByName("btnMerge").getChildByName("disable").active = true;
+        // this.node.getChildByName("btnMerge").getChildByName("disable").active = true;
         this.threeDNode.merge();
         this.sliderMerge.active = true;
     }
@@ -107,5 +107,15 @@ export default class GameUI extends cc.Component {
     private onSlideMerge(event) {
         let progress = event.progress;
         this.threeDNode.controlMerge(progress);
+    }
+
+    private onClickShowZuoBiao() {
+        this.threeDNode.reset();
+        // this.node.getChildByName("btnZuobiao").getChildByName("disable").active = true;
+        // let zuobiao_node = this.node.getChildByName("zuobiao_node");
+        // zuobiao_node.active = true;
+        // let zuobiao_top = zuobiao_node.getChildByName("top");
+        // let count = SyncDataManager.getSyncData().customSyncData.count;
+        // zuobiao_top.y = count * 80;
     }
 }
