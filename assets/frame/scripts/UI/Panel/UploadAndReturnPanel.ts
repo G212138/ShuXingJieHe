@@ -44,12 +44,12 @@ export default class UploadAndReturnPanel extends BaseFrameUI {
     }
 
     onTiJiao() {
-        const isEdit = EditorManager.isSupportEdit();
-        if (!isEdit || ReportManager.isAllOver) {
+        // const isEdit = EditorManager.isSupportEdit();
+        // if (!isEdit || ReportManager.isAllOver) {
             UIHelp.showSubmissionPanel();
-        } else {
-            UIHelp.showTip('请先完成一遍题目');
-        }
+        // } else {
+        //     UIHelp.showTip('请先完成一遍题目');
+        // }
     }
 
     adjustWidget() {

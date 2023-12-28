@@ -1,10 +1,11 @@
 import { ListenerManager } from '../../../../frame/scripts/Manager/ListenerManager';
-import { SyncData } from '../../../../frame/scripts/Manager/SyncDataManager';
+import { SyncData, SyncDataManager } from '../../../../frame/scripts/Manager/SyncDataManager';
 import BaseGamePanel from '../../../../frame/scripts/UI/Panel/BaseGamePanel';
 import { ConstValue } from '../../Data/ConstValue';
 import { EventType } from '../../Data/EventType';
 import { NetWork } from '../../../../frame/scripts/Http/NetWork';
 import { T2M } from '../../../../frame/scripts/SDK/T2M';
+import { EditorManager } from '../../Manager/EditorManager';
 
 const { ccclass, property } = cc._decorator;
 
@@ -26,6 +27,7 @@ export default class GamePanel extends BaseGamePanel {
      */
     protected setPanel() {
         super.setPanel();
+        SyncDataManager.getSyncData().customSyncData.count = EditorManager.editorData.count;
         // TODO 业务逻辑
         let mainCamera = cc.find("Canvas/Main Camera").getComponent(cc.Camera)
         let bg = mainCamera.getComponent(cc.Sprite)

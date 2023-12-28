@@ -12,4 +12,6 @@ export enum EventType {
     CLICK_CUBE = "CLICK_CUBE",
 
     DRAG_END = "DRAG_END",
+
+    hebingwancheng = "hebingwancheng",
 }

@@ -17,6 +17,7 @@ var EventType;
     EventType["CUBE_OPEN"] = "CUBE_OPEN";
     EventType["CLICK_CUBE"] = "CLICK_CUBE";
     EventType["DRAG_END"] = "DRAG_END";
+    EventType["hebingwancheng"] = "hebingwancheng";
 })(EventType = exports.EventType || (exports.EventType = {}));
 
 cc._RF.pop();

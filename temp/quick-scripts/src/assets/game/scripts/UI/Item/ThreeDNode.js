@@ -23,8 +23,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var ListenerManager_1 = require("../../../../frame/scripts/Manager/ListenerManager");
 var SoundManager_1 = require("../../../../frame/scripts/Manager/SoundManager");
 var SyncDataManager_1 = require("../../../../frame/scripts/Manager/SyncDataManager");
+var EventType_1 = require("../../Data/EventType");
 var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
 var ThreeNode = /** @class */ (function (_super) {
     __extends(ThreeNode, _super);
@@ -62,6 +64,13 @@ var ThreeNode = /** @class */ (function (_super) {
         this.initBigCube();
     };
     ThreeNode.prototype.showStep2 = function () {
+        var progress = 0;
+        this.secondStepBigCube[0].eulerAngles = cc.v3(-90 * progress, 0, 0);
+        this.secondStepBigCube[1].eulerAngles = cc.v3(180 * progress, -90, 0);
+        this.secondStepBigCube[2].eulerAngles = cc.v3(0, 0, 90 * progress);
+        this.secondStepBigCube[3].eulerAngles = cc.v3(90 * progress, -90 * (1 - progress) + 90 * progress, 0);
+        this.secondStepBigCube[4].eulerAngles = cc.v3(0, 180 * progress, 0);
+        this.secondStepBigCube[5].eulerAngles = cc.v3(0, -90, -90 * progress);
         this.cubeRootNode.getChildByName("firstStep").opacity = 0;
         this.cubeRootNode.getChildByName("secondStep").opacity = 255;
         this.showSecondStep();
@@ -133,6 +142,24 @@ var ThreeNode = /** @class */ (function (_super) {
         var bottomquat = new cc.Quat();
         cc.Quat.fromEuler(bottomquat, 0, 0, -5 * scale - 10);
         bottom.setRotation(bottomquat);
+        this.secondStepBigCube[0].x = 0;
+        this.secondStepBigCube[0].z = scale;
+        this.secondStepBigCube[1].position = cc.v3(0, 0, 0);
+        this.secondStepBigCube[2].x = 0;
+        this.secondStepBigCube[2].y = -scale;
+        this.secondStepBigCube[3].x = 0;
+        this.secondStepBigCube[3].z = scale;
+        this.secondStepBigCube[4].y = -scale;
+        this.secondStepBigCube[4].z = scale;
+        this.secondStepBigCube[5].x = 0;
+        this.secondStepBigCube[5].y = -scale;
+        var count2 = count % 2 == 0 ? count / 2 : Math.floor(count / 2) + 0.5;
+        var offset = count2 * scale * (5 - 1 * 5) > 0 ? count2 * scale * (5 - 1 * 5) : 0;
+        this.secondStepBigCube[0].parent.y = count2 * scale + offset > 5 ? 5 : count2 * scale + offset;
+        this.secondStepBigCube[3].parent.y = -count2 * scale - offset < -5 ? -5 : -count2 * scale - offset;
+    };
+    ThreeNode.prototype.hideZuobiao = function () {
+        this.node.getChildByName("zuobiao_node").active = false;
     };
     //初始化大正方体
     ThreeNode.prototype.initBigCube = function () {
@@ -300,11 +327,13 @@ var ThreeNode = /** @class */ (function (_super) {
                         SoundManager_1.SoundManager.playEffect("拼", false, false);
                         SoundManager_1.SoundManager.stopSoundByName("移动");
                         SoundManager_1.SoundManager.playEffect("移动", false, false);
-                        cc.tween(node_0.parent).to(1, { y: Math.floor(count / 2) * scale }).call(function () {
+                        var count2 = count % 2 == 0 ? count / 2 : Math.floor(count / 2) + 0.5;
+                        cc.tween(node_0.parent).to(1, { y: count2 * scale }).call(function () {
                         }).start();
-                        cc.tween(node_3.parent).to(1, { y: -Math.floor(count / 2) * scale }).call(function () {
+                        cc.tween(node_3.parent).to(1, { y: -count2 * scale }).call(function () {
                             SoundManager_1.SoundManager.stopSoundByName("拼");
                             SoundManager_1.SoundManager.playEffect("拼", false, false);
+                            ListenerManager_1.ListenerManager.dispatch(EventType_1.EventType.hebingwancheng);
                         }).start();
                     }).start();
                 }).start();
@@ -396,9 +425,10 @@ var ThreeNode = /** @class */ (function (_super) {
             this.secondStepBigCube[4].z = scale;
             this.secondStepBigCube[5].x = 0;
             this.secondStepBigCube[5].y = -scale;
-            var offset = Math.floor(count / 2) * scale * (5 - progress * 5) > 0 ? Math.floor(count / 2) * scale * (5 - progress * 5) : 0;
-            this.secondStepBigCube[0].parent.y = Math.floor(count / 2) * scale + offset > 5 ? 5 : Math.floor(count / 2) * scale + offset;
-            this.secondStepBigCube[3].parent.y = -Math.floor(count / 2) * scale - offset < -5 ? -5 : -Math.floor(count / 2) * scale - offset;
+            var count2 = count % 2 == 0 ? count / 2 : Math.floor(count / 2) + 0.5;
+            var offset = count2 * scale * (5 - progress * 5) > 0 ? count2 * scale * (5 - progress * 5) : 0;
+            this.secondStepBigCube[0].parent.y = count2 * scale + offset > 5 ? 5 : count2 * scale + offset;
+            this.secondStepBigCube[3].parent.y = -count2 * scale - offset < -5 ? -5 : -count2 * scale - offset;
         }
     };
     ThreeNode.prototype.stopAllTween = function () {

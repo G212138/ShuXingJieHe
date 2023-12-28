@@ -21,6 +21,9 @@ export default class TeacherPanel extends BaseTeacherPanel {
     @property(cc.ToggleContainer)
     private toggle_titleAudio: cc.ToggleContainer = null;
 
+    @property(cc.ToggleContainer)
+    private toggle_count: cc.ToggleContainer = null;
+
     private _btn_save: cc.Node = null;
     private _btn_view: cc.Node = null;
 
@@ -32,10 +35,10 @@ export default class TeacherPanel extends BaseTeacherPanel {
         super.start();
 
         // 可编辑的游戏，不展示保存按钮
-        const isEdit = EditorManager.isSupportEdit();
-        if (this._btn_save) {
-            this._btn_save.active = !isEdit;
-        }
+        // const isEdit = EditorManager.isSupportEdit();
+        // if (this._btn_save) {
+        //     this._btn_save.active = !isEdit;
+        // }
     }
 
     /**
@@ -46,6 +49,8 @@ export default class TeacherPanel extends BaseTeacherPanel {
         this.toggle_stars.toggleItems[EditorManager.editorData.isStarCount ? 0 : 1].isChecked = true;
         this.toggle_replay.toggleItems[EditorManager.editorData.isReplay ? 0 : 1].isChecked = true;
         this.toggle_titleAudio.toggleItems[EditorManager.editorData.isPlayTitle ? 0 : 1].isChecked = true;
+
+        this.toggle_count.toggleItems[EditorManager.editorData.count - 2].isChecked = true;
     }
 
     // 星级评判开关
@@ -66,14 +71,19 @@ export default class TeacherPanel extends BaseTeacherPanel {
         EditorManager.editorData.isPlayTitle = 0 === index;
     }
 
+    public onToggleCount(toggle: cc.Toggle): void {
+        let index = this.toggle_count.toggleItems.indexOf(toggle);
+        EditorManager.editorData.count = index + 2;
+    }
+
     // 保存课件按钮
     public onBtnSaveClicked() {
-        const isEdit = EditorManager.isSupportEdit();
-        if (!isEdit || ReportManager.isAllOver) {
+        // const isEdit = EditorManager.isSupportEdit();
+        // if (!isEdit || ReportManager.isAllOver) {
             UIHelp.showSubmissionPanel();
-        } else {
-            UIHelp.showTip('请先完成一遍题目');
-        }
+        // } else {
+        //     UIHelp.showTip('请先完成一遍题目');
+        // }
     }
     // 预览课件按钮
     public onBtnViewClicked() {

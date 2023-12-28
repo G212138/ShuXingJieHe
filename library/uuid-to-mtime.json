@@ -419,11 +419,6 @@
     "meta": 1702882433822,
     "relativePath": "game\\res\\spine\\laba"
   },
-  "64363460-bd77-4224-9769-7b1450bfcf4f": {
-    "asset": 1698026685719,
-    "meta": 1698133083962,
-    "relativePath": "game\\scripts\\Manager\\EditorManager.ts"
-  },
   "473bd55c-e88f-4ebc-b2ea-3ba69c1ac28e": {
     "asset": 1703572949805,
     "meta": 1703572949815,
@@ -1134,11 +1129,6 @@
     "meta": 1703572934058,
     "relativePath": "game\\res\\model\\5.mtl"
   },
-  "8a2a4868-e159-4296-8242-bf33c247d6bf": {
-    "asset": 1698200677463,
-    "meta": 1698200679441,
-    "relativePath": "frame\\scripts\\UI\\Panel\\UploadAndReturnPanel.ts"
-  },
   "1899a947-d5d1-44a7-b0b3-88300def98b3": {
     "asset": 1702881650524,
     "meta": 1702882433794,
@@ -1198,11 +1188,6 @@
     "asset": 1698314829894,
     "meta": 1698314829925,
     "relativePath": "game\\res\\images\\xuanzhong.png"
-  },
-  "70c27101-9967-4f25-8b60-310f5dc8f652": {
-    "asset": 1698317279126,
-    "meta": 1698317280359,
-    "relativePath": "game\\scripts\\UI\\panel\\TeacherPanel.ts"
   },
   "b2ee0042-da5d-4fa7-8ee7-b8cdbbf4e20e": {
     "asset": 1699339375968,
@@ -1709,29 +1694,19 @@
     "meta": 1703470745033,
     "relativePath": "model\\primitives.fbx"
   },
-  "246c238e-9069-4a1e-86ba-64939510723e": {
-    "asset": 1698896372343,
-    "meta": 1698896538817,
-    "relativePath": "game\\scripts\\UI\\panel\\GamePanel.ts"
-  },
-  "9d48be3c-b2aa-4476-8cce-9db39c542001": {
-    "asset": 1698906632057,
-    "meta": 1698906817605,
-    "relativePath": "game\\scripts\\Data\\EventType.ts"
-  },
   "0ccc7020-6c45-4504-8016-81debd11baf4": {
     "asset": 1699014105167,
     "meta": 1699014141364,
     "relativePath": "game\\scripts\\Components\\DragSync.ts"
   },
   "32f855fb-ac45-4a70-9924-652cc84cf88d": {
-    "asset": 1703671427214,
-    "meta": 1703671427231,
+    "asset": 1703748041591,
+    "meta": 1703748041603,
     "relativePath": "resources\\prefab\\ui\\panel\\GamePanel.prefab"
   },
   "62af3dd2-526f-4df6-81ef-c3b28cf4a879": {
-    "asset": 1697941060396,
-    "meta": 1702034323136,
+    "asset": 1703750636745,
+    "meta": 1703750636760,
     "relativePath": "resources\\prefab\\ui\\panel\\TeacherPanel.prefab"
   },
   "9c012f90-bda9-43e1-9fdc-87d5778aa758": {
@@ -1794,11 +1769,6 @@
     "meta": 1699339560021,
     "relativePath": "frame\\scripts\\Http\\NetWork.ts"
   },
-  "f6665ca6-d089-4935-82aa-e1d6bf4c79b0": {
-    "asset": 1703576087401,
-    "meta": 1703576088487,
-    "relativePath": "game\\scripts\\Data\\CustomSyncData.ts"
-  },
   "baddec7c-179b-47d0-bbc7-92d339b425da": {
     "asset": 1703583282500,
     "meta": 1703583283257,
@@ -1814,19 +1784,129 @@
     "meta": 1703583338826,
     "relativePath": "game\\scripts\\UI\\Item\\SoundConfig.ts"
   },
+  "9d48be3c-b2aa-4476-8cce-9db39c542001": {
+    "asset": 1703743569193,
+    "meta": 1703743742641,
+    "relativePath": "game\\scripts\\Data\\EventType.ts"
+  },
+  "5c969fd1-9dd0-4ce7-9353-b59f4aba9064": {
+    "asset": 1703744580206,
+    "meta": 1703744580275,
+    "relativePath": "game\\res\\images\\btn_baocun_pressed.png"
+  },
+  "a72cc98c-9026-4ae8-8c9e-705d6ea1eb73": {
+    "asset": 1703744580206,
+    "meta": 1703744580279,
+    "relativePath": "game\\res\\images\\btn_xuanzhuan_disabled.png"
+  },
+  "f6809d5d-957d-419a-ae2b-c3ae056ac155": {
+    "asset": 1703744580206,
+    "meta": 1703744580283,
+    "relativePath": "game\\res\\images\\btn_chehui_disabled.png"
+  },
+  "5979cd42-44ff-4e8f-8e1f-fe5dfbc26e60": {
+    "asset": 1703744580206,
+    "meta": 1703744580288,
+    "relativePath": "game\\res\\images\\btn_baocun_disabled.png"
+  },
+  "b51be7a6-09be-4e52-9241-676e867d48c5": {
+    "asset": 1703744580206,
+    "meta": 1703744580291,
+    "relativePath": "game\\res\\images\\btn_chehui_pressed.png"
+  },
+  "97f3949b-f3b7-4973-8e89-2cc0e8c2ec7f": {
+    "asset": 1703744580207,
+    "meta": 1703744580294,
+    "relativePath": "game\\res\\images\\btn_xuanzhuan_pressed.png"
+  },
+  "eaf1b8c7-c372-4bf0-889e-d73dbac0e831": {
+    "asset": 1703744580206,
+    "meta": 1703744580297,
+    "relativePath": "game\\res\\images\\btn_baocun_normal.png"
+  },
+  "e15d648d-7436-4a10-b62a-5e17a5602761": {
+    "asset": 1703744580206,
+    "meta": 1703744580299,
+    "relativePath": "game\\res\\images\\btn_chehui_normal.png"
+  },
+  "73e11695-723a-418d-bbf2-dcef7249c43d": {
+    "asset": 1703744580207,
+    "meta": 1703744580324,
+    "relativePath": "game\\res\\images\\btn_zhengsi_normal.png"
+  },
+  "a795b613-520a-40f6-bb04-3d9e5f7e07f2": {
+    "asset": 1703744580207,
+    "meta": 1703744580327,
+    "relativePath": "game\\res\\images\\btn_xuanzhuan_normal.png"
+  },
+  "a1e1b4fd-6a43-48c9-810b-b660038b7269": {
+    "asset": 1703744580207,
+    "meta": 1703744580330,
+    "relativePath": "game\\res\\images\\btn_ziyou_disabled.png"
+  },
+  "82cc87a4-ccce-4348-a767-92b8ae7f5f70": {
+    "asset": 1703744580207,
+    "meta": 1703744580335,
+    "relativePath": "game\\res\\images\\btn_zhengsi_pressed.png"
+  },
+  "65236ddc-5f33-493f-a830-f246b11a21b2": {
+    "asset": 1703744580207,
+    "meta": 1703744580337,
+    "relativePath": "game\\res\\images\\btn_ziyou_normal.png"
+  },
+  "a22e6b33-1871-42c3-a668-f70cef5159d2": {
+    "asset": 1703744580208,
+    "meta": 1703744580341,
+    "relativePath": "game\\res\\images\\btn_ziyou_pressed.png"
+  },
+  "f95e0020-e5d2-47c5-bc58-c7af888f7528": {
+    "asset": 1703744580207,
+    "meta": 1703744580347,
+    "relativePath": "game\\res\\images\\btn_zhengsi_disabled.png"
+  },
+  "4fd36c74-a9fd-4e7c-9905-4a168f7fcbc0": {
+    "asset": 1703744580207,
+    "meta": 1703744926948,
+    "relativePath": "game\\res\\images\\img_1.png"
+  },
   "7af0210f-3ff0-4eb3-98c1-d45f3e67d904": {
-    "asset": 1703661770522,
-    "meta": 1703661771256,
+    "asset": 1703748833050,
+    "meta": 1703748869753,
     "relativePath": "game\\scripts\\UI\\Layer\\GameLayer.ts"
   },
+  "888f772b-9980-4fa7-9a70-1c7126200e95": {
+    "asset": 1703749643841,
+    "meta": 1703749645069,
+    "relativePath": "game\\scripts\\UI\\Item\\ThreeDNode.ts"
+  },
   "3f05f3c0-422a-4d5e-8a32-9db4557b2b2e": {
-    "asset": 1703669534373,
-    "meta": 1703669535036,
+    "asset": 1703750008189,
+    "meta": 1703750009491,
     "relativePath": "game\\scripts\\UI\\Item\\GameUI.ts"
   },
-  "888f772b-9980-4fa7-9a70-1c7126200e95": {
-    "asset": 1703672355379,
-    "meta": 1703672356275,
-    "relativePath": "game\\scripts\\UI\\Item\\ThreeDNode.ts"
+  "f6665ca6-d089-4935-82aa-e1d6bf4c79b0": {
+    "asset": 1703750458601,
+    "meta": 1703750518612,
+    "relativePath": "game\\scripts\\Data\\CustomSyncData.ts"
+  },
+  "64363460-bd77-4224-9769-7b1450bfcf4f": {
+    "asset": 1703750463435,
+    "meta": 1703750518633,
+    "relativePath": "game\\scripts\\Manager\\EditorManager.ts"
+  },
+  "8a2a4868-e159-4296-8242-bf33c247d6bf": {
+    "asset": 1703750567147,
+    "meta": 1703750601238,
+    "relativePath": "frame\\scripts\\UI\\Panel\\UploadAndReturnPanel.ts"
+  },
+  "70c27101-9967-4f25-8b60-310f5dc8f652": {
+    "asset": 1703750559136,
+    "meta": 1703750601302,
+    "relativePath": "game\\scripts\\UI\\panel\\TeacherPanel.ts"
+  },
+  "246c238e-9069-4a1e-86ba-64939510723e": {
+    "asset": 1703750678704,
+    "meta": 1703750679632,
+    "relativePath": "game\\scripts\\UI\\panel\\GamePanel.ts"
   }
 }

@@ -1,5 +1,7 @@
+import { ListenerManager } from "../../../../frame/scripts/Manager/ListenerManager";
 import { SoundManager } from "../../../../frame/scripts/Manager/SoundManager";
 import { SyncDataManager } from "../../../../frame/scripts/Manager/SyncDataManager";
+import { EventType } from "../../Data/EventType";
 import { SoundConfig } from "./SoundConfig";
 
 const { ccclass, property } = cc._decorator;
@@ -49,6 +51,14 @@ export default class ThreeNode extends cc.Component {
     }
 
     public showStep2() {
+        let progress = 0;
+        this.secondStepBigCube[0].eulerAngles = cc.v3(-90 * progress, 0, 0);
+        this.secondStepBigCube[1].eulerAngles = cc.v3(180 * progress, -90, 0);
+        this.secondStepBigCube[2].eulerAngles = cc.v3(0, 0, 90 * progress);
+        this.secondStepBigCube[3].eulerAngles = cc.v3(90 * progress, -90 * (1 - progress) + 90 * progress, 0);
+        this.secondStepBigCube[4].eulerAngles = cc.v3(0, 180 * progress, 0);
+        this.secondStepBigCube[5].eulerAngles = cc.v3(0, -90, -90 * progress);
+
         this.cubeRootNode.getChildByName("firstStep").opacity = 0;
         this.cubeRootNode.getChildByName("secondStep").opacity = 255;
         this.showSecondStep();
@@ -108,7 +118,7 @@ export default class ThreeNode extends cc.Component {
         // console.log("top.pos", top.position);
 
         let right = zuobiao_node.getChildByName("right");
-        right.height = ((2 * count + 1) * scale / 0.03) * 0.75 ;
+        right.height = ((2 * count + 1) * scale / 0.03) * 0.75;
         right.x = count * scale / 0.03 + (count > 2 ? 0 : count * 10);
         right.y = count * 5;
         right.getChildByName("lbl_count").getComponent(cc.Label).string = "(" + count + "x2+1)";
@@ -119,14 +129,42 @@ export default class ThreeNode extends cc.Component {
 
         let bottom = zuobiao_node.getChildByName("bottom");
         bottom.height = ((2 * count + 1) * scale / 0.03) * 0.45 - count * 5;
-        bottom.x = count * scale / 0.03 -(count *10);
-        bottom.y = -count * scale / 0.03 -((count) *10) - (count < 5?bottom.height / count : -2*count);
+        bottom.x = count * scale / 0.03 - (count * 10);
+        bottom.y = -count * scale / 0.03 - ((count) * 10) - (count < 5 ? bottom.height / count : -2 * count);
         bottom.getChildByName("line_1").height = bottom.height / 2 - 30;
         bottom.getChildByName("line_2").height = bottom.height / 2 - 30;
         bottom.getChildByName("lbl_count").getComponent(cc.Label).string = "(" + count + "+1)";
         let bottomquat = new cc.Quat()
         cc.Quat.fromEuler(bottomquat, 0, 0, -5 * scale - 10)
         bottom.setRotation(bottomquat);
+
+
+        this.secondStepBigCube[0].x = 0;
+        this.secondStepBigCube[0].z = scale;
+
+        this.secondStepBigCube[1].position = cc.v3(0, 0, 0);
+
+        this.secondStepBigCube[2].x = 0;
+        this.secondStepBigCube[2].y = -scale;
+
+
+        this.secondStepBigCube[3].x = 0;
+        this.secondStepBigCube[3].z = scale;
+
+        this.secondStepBigCube[4].y = -scale;
+        this.secondStepBigCube[4].z = scale;
+
+        this.secondStepBigCube[5].x = 0;
+        this.secondStepBigCube[5].y = -scale;
+
+        let count2 = count % 2 == 0 ? count / 2 : Math.floor(count / 2) + 0.5;
+        let offset = count2 * scale * (5 - 1 * 5) > 0 ? count2 * scale * (5 - 1 * 5) : 0;
+        this.secondStepBigCube[0].parent.y = count2 * scale + offset > 5 ? 5 : count2 * scale + offset;
+        this.secondStepBigCube[3].parent.y = -count2 * scale - offset < -5 ? -5 : -count2 * scale - offset;
+    }
+
+    public hideZuobiao() {
+        this.node.getChildByName("zuobiao_node").active = false;
     }
 
     //初始化大正方体
@@ -315,13 +353,14 @@ export default class ThreeNode extends cc.Component {
                         SoundManager.playEffect("拼", false, false);
                         SoundManager.stopSoundByName("移动");
                         SoundManager.playEffect("移动", false, false);
-                        cc.tween(node_0.parent).to(1, { y: Math.floor(count / 2) * scale }).call(() => {
+                        let count2 = count % 2 == 0 ? count / 2 : Math.floor(count / 2) + 0.5;
+                        cc.tween(node_0.parent).to(1, { y: count2 * scale }).call(() => {
 
                         }).start();
-                        cc.tween(node_3.parent).to(1, { y: -Math.floor(count / 2) * scale }).call(() => {
+                        cc.tween(node_3.parent).to(1, { y: -count2 * scale }).call(() => {
                             SoundManager.stopSoundByName("拼");
                             SoundManager.playEffect("拼", false, false);
-
+                            ListenerManager.dispatch(EventType.hebingwancheng);
                         }).start();
                     }).start();
                 }).start();
@@ -442,9 +481,10 @@ export default class ThreeNode extends cc.Component {
             this.secondStepBigCube[5].x = 0;
             this.secondStepBigCube[5].y = -scale;
 
-            let offset = Math.floor(count / 2) * scale * (5 - progress * 5) > 0 ? Math.floor(count / 2) * scale * (5 - progress * 5) : 0;
-            this.secondStepBigCube[0].parent.y = Math.floor(count / 2) * scale + offset > 5 ? 5 : Math.floor(count / 2) * scale + offset;
-            this.secondStepBigCube[3].parent.y = -Math.floor(count / 2) * scale - offset < -5 ? -5 : -Math.floor(count / 2) * scale - offset;
+            let count2 = count % 2 == 0 ? count / 2 : Math.floor(count / 2) + 0.5;
+            let offset = count2 * scale * (5 - progress * 5) > 0 ? count2 * scale * (5 - progress * 5) : 0;
+            this.secondStepBigCube[0].parent.y = count2 * scale + offset > 5 ? 5 : count2 * scale + offset;
+            this.secondStepBigCube[3].parent.y = -count2 * scale - offset < -5 ? -5 : -count2 * scale - offset;
         }
     }
 

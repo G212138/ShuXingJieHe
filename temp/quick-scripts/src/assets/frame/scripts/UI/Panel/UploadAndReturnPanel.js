@@ -30,7 +30,6 @@ var UIHelp_1 = require("../../Utils/UIHelp");
 var ReportManager_1 = require("../../Manager/ReportManager");
 var SoundManager_1 = require("../../Manager/SoundManager");
 var T2M_1 = require("../../SDK/T2M");
-var EditorManager_1 = require("../../../../game/scripts/Manager/EditorManager");
 var UIManager_1 = require("../../Manager/UIManager");
 var TeacherPanel_1 = require("../../../../game/scripts/UI/panel/TeacherPanel");
 var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
@@ -66,13 +65,12 @@ var UploadAndReturnPanel = /** @class */ (function (_super) {
         mainCamera.clearFlags = cc.Camera.ClearFlags.DEPTH | cc.Camera.ClearFlags.STENCIL | cc.Camera.ClearFlags.COLOR;
     };
     UploadAndReturnPanel.prototype.onTiJiao = function () {
-        var isEdit = EditorManager_1.EditorManager.isSupportEdit();
-        if (!isEdit || ReportManager_1.ReportManager.isAllOver) {
-            UIHelp_1.UIHelp.showSubmissionPanel();
-        }
-        else {
-            UIHelp_1.UIHelp.showTip('请先完成一遍题目');
-        }
+        // const isEdit = EditorManager.isSupportEdit();
+        // if (!isEdit || ReportManager.isAllOver) {
+        UIHelp_1.UIHelp.showSubmissionPanel();
+        // } else {
+        //     UIHelp.showTip('请先完成一遍题目');
+        // }
     };
     UploadAndReturnPanel.prototype.adjustWidget = function () {
         var scenceHeight = cc.winSize.height;

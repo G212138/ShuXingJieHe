@@ -13,10 +13,11 @@ var CustomSyncData = /** @class */ (function () {
     function CustomSyncData() {
         this.curLevel = 0; // 当前关卡(第一关为0)
         // TODO 自定义
-        this.count = 4;
+        this.count = 2;
         this.eulerX = 0;
         this.eulerY = -15;
         this.eulerZ = 0;
+        this.curIndex = 0;
     }
     return CustomSyncData;
 }());

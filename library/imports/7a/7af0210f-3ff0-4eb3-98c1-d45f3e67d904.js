@@ -70,9 +70,13 @@ var GameLayer = /** @class */ (function (_super) {
         this.cubeRootNode.setRotation(rotation);
     };
     GameLayer.prototype.onDragStart = function (data) {
+        if (SyncDataManager_1.SyncDataManager.getSyncData().customSyncData.curIndex == 4)
+            return;
         this.addMinus.active = false;
     };
     GameLayer.prototype.onDragMove = function (data) {
+        if (SyncDataManager_1.SyncDataManager.getSyncData().customSyncData.curIndex == 4)
+            return;
         var pos = data.target.parent.convertToWorldSpaceAR(cc.v2(data.pos.x, data.pos.y));
         var prevPos = data.target.parent.convertToWorldSpaceAR(cc.v2(data.prevLocation.x, data.prevLocation.y));
         var prevLocation = cc.v2(prevPos.x, prevPos.y);
@@ -105,6 +109,8 @@ var GameLayer = /** @class */ (function (_super) {
         }
     };
     GameLayer.prototype.onDragEnd = function (data) {
+        if (SyncDataManager_1.SyncDataManager.getSyncData().customSyncData.curIndex == 4)
+            return;
         if (data.isClick) {
             this.addMinus.active = false;
         }

@@ -25,7 +25,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var FrameMsgType_1 = require("../../../../frame/scripts/Data/FrameMsgType");
 var ListenerManager_1 = require("../../../../frame/scripts/Manager/ListenerManager");
-var ReportManager_1 = require("../../../../frame/scripts/Manager/ReportManager");
 var UIManager_1 = require("../../../../frame/scripts/Manager/UIManager");
 var BaseTeacherPanel_1 = require("../../../../frame/scripts/UI/Panel/BaseTeacherPanel");
 var UIHelp_1 = require("../../../../frame/scripts/Utils/UIHelp");
@@ -39,6 +38,7 @@ var TeacherPanel = /** @class */ (function (_super) {
         _this.toggle_stars = null;
         _this.toggle_replay = null;
         _this.toggle_titleAudio = null;
+        _this.toggle_count = null;
         _this._btn_save = null;
         _this._btn_view = null;
         return _this;
@@ -50,10 +50,10 @@ var TeacherPanel = /** @class */ (function (_super) {
     TeacherPanel.prototype.start = function () {
         _super.prototype.start.call(this);
         // 可编辑的游戏，不展示保存按钮
-        var isEdit = EditorManager_1.EditorManager.isSupportEdit();
-        if (this._btn_save) {
-            this._btn_save.active = !isEdit;
-        }
+        // const isEdit = EditorManager.isSupportEdit();
+        // if (this._btn_save) {
+        //     this._btn_save.active = !isEdit;
+        // }
     };
     /**
      * 设置界面（这里已经拿到了网络请求数据）
@@ -63,6 +63,7 @@ var TeacherPanel = /** @class */ (function (_super) {
         this.toggle_stars.toggleItems[EditorManager_1.EditorManager.editorData.isStarCount ? 0 : 1].isChecked = true;
         this.toggle_replay.toggleItems[EditorManager_1.EditorManager.editorData.isReplay ? 0 : 1].isChecked = true;
         this.toggle_titleAudio.toggleItems[EditorManager_1.EditorManager.editorData.isPlayTitle ? 0 : 1].isChecked = true;
+        this.toggle_count.toggleItems[EditorManager_1.EditorManager.editorData.count - 2].isChecked = true;
     };
     // 星级评判开关
     TeacherPanel.prototype.onToggleStar = function (toggle) {
@@ -79,15 +80,18 @@ var TeacherPanel = /** @class */ (function (_super) {
         var index = this.toggle_titleAudio.toggleItems.indexOf(toggle);
         EditorManager_1.EditorManager.editorData.isPlayTitle = 0 === index;
     };
+    TeacherPanel.prototype.onToggleCount = function (toggle) {
+        var index = this.toggle_count.toggleItems.indexOf(toggle);
+        EditorManager_1.EditorManager.editorData.count = index + 2;
+    };
     // 保存课件按钮
     TeacherPanel.prototype.onBtnSaveClicked = function () {
-        var isEdit = EditorManager_1.EditorManager.isSupportEdit();
-        if (!isEdit || ReportManager_1.ReportManager.isAllOver) {
-            UIHelp_1.UIHelp.showSubmissionPanel();
-        }
-        else {
-            UIHelp_1.UIHelp.showTip('请先完成一遍题目');
-        }
+        // const isEdit = EditorManager.isSupportEdit();
+        // if (!isEdit || ReportManager.isAllOver) {
+        UIHelp_1.UIHelp.showSubmissionPanel();
+        // } else {
+        //     UIHelp.showTip('请先完成一遍题目');
+        // }
     };
     // 预览课件按钮
     TeacherPanel.prototype.onBtnViewClicked = function () {
@@ -113,6 +117,9 @@ var TeacherPanel = /** @class */ (function (_super) {
     __decorate([
         property(cc.ToggleContainer)
     ], TeacherPanel.prototype, "toggle_titleAudio", void 0);
+    __decorate([
+        property(cc.ToggleContainer)
+    ], TeacherPanel.prototype, "toggle_count", void 0);
     TeacherPanel = TeacherPanel_1 = __decorate([
         ccclass
     ], TeacherPanel);

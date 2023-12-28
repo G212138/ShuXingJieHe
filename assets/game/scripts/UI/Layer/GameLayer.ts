@@ -58,10 +58,12 @@ export default class GameLayer extends cc.Component {
     }
 
     private onDragStart(data) {
+        if (SyncDataManager.getSyncData().customSyncData.curIndex == 4) return; 
         this.addMinus.active = false;
     }
 
     private onDragMove(data) {
+        if (SyncDataManager.getSyncData().customSyncData.curIndex == 4) return; 
         let pos = data.target.parent.convertToWorldSpaceAR(cc.v2(data.pos.x, data.pos.y));
         let prevPos = data.target.parent.convertToWorldSpaceAR(cc.v2(data.prevLocation.x, data.prevLocation.y));
         let prevLocation = cc.v2(prevPos.x, prevPos.y);
@@ -98,6 +100,7 @@ export default class GameLayer extends cc.Component {
     }
 
     private onDragEnd(data) {
+        if (SyncDataManager.getSyncData().customSyncData.curIndex == 4) return; 
         if (data.isClick) {
             this.addMinus.active = false;
         }

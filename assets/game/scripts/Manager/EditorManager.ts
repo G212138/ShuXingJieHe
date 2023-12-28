@@ -20,6 +20,7 @@ class EditorData {
     public coursewareLevel: number = 2;
 
     // TODO 自定义数据
+    public count: number = 2;
 }
 
 class EditorManagerClass {

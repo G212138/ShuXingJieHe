@@ -24,8 +24,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var ListenerManager_1 = require("../../../../frame/scripts/Manager/ListenerManager");
+var SyncDataManager_1 = require("../../../../frame/scripts/Manager/SyncDataManager");
 var BaseGamePanel_1 = require("../../../../frame/scripts/UI/Panel/BaseGamePanel");
 var EventType_1 = require("../../Data/EventType");
+var EditorManager_1 = require("../../Manager/EditorManager");
 var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
 var GamePanel = /** @class */ (function (_super) {
     __extends(GamePanel, _super);
@@ -44,6 +46,7 @@ var GamePanel = /** @class */ (function (_super) {
      */
     GamePanel.prototype.setPanel = function () {
         _super.prototype.setPanel.call(this);
+        SyncDataManager_1.SyncDataManager.getSyncData().customSyncData.count = EditorManager_1.EditorManager.editorData.count;
         // TODO 业务逻辑
         var mainCamera = cc.find("Canvas/Main Camera").getComponent(cc.Camera);
         var bg = mainCamera.getComponent(cc.Sprite);
