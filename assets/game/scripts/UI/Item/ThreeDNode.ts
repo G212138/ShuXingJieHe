@@ -65,6 +65,7 @@ export default class ThreeNode extends cc.Component {
     }
 
     public reset() {
+        SoundManager.stopAllEffect();
         let quat = new cc.Quat()
         cc.Quat.fromEuler(quat, 15, -25, -5)
         this.cubeRootNode.setRotation(quat);
@@ -101,6 +102,12 @@ export default class ThreeNode extends cc.Component {
 
         let count = SyncDataManager.getSyncData().customSyncData.count;
         let scale = 1 + (8 - count) * 0.15;
+        if (count > 5) {
+            scale = 1 + (8 - count) * 0.1;
+        }
+        if (count > 7) {
+            scale = 0.9;
+        }
         let cubeStartX = -count / 2;
 
         let zuobiao_node = this.node.getChildByName("zuobiao_node");
@@ -206,7 +213,14 @@ export default class ThreeNode extends cc.Component {
                 }
             }
         }
-        this.cubeRootNode.getChildByName("firstStep").scale = 1 + (8 - count) * 0.15;
+        let scale = 1 + (8 - count) * 0.15;
+        if (count > 5) {
+            scale = 1 + (8 - count) * 0.1;
+        }
+        if (count > 7) {
+            scale = 0.9;
+        }
+        this.cubeRootNode.getChildByName("firstStep").scale = scale;
     }
 
     private showSecondStep() {
@@ -235,7 +249,14 @@ export default class ThreeNode extends cc.Component {
 
         for (let index = 0; index < 6; index++) {
             let node = this.secondStepBigCube[index];
-            node.scale = 1 + (8 - count) * 0.15;
+            let scale = 1 + (8 - count) * 0.15;
+            if (count > 5) {
+                scale = 1 + (8 - count) * 0.1;
+            }
+            if (count > 7) {
+                scale = 0.9;
+            }
+            node.scale = scale;
             node.is3DNode = true;
             if (index == 3 || index == 1 || index == 5) {
                 node.eulerAngles = cc.v3(0, -90, 0);
@@ -287,8 +308,15 @@ export default class ThreeNode extends cc.Component {
     }
 
     public rotation() {
+        this.sliderRotate.getComponent(cc.Slider).enabled = false;
         let count = SyncDataManager.getSyncData().customSyncData.count;
         let scale = 1 + (8 - count) * 0.15;
+        if (count > 5) {
+            scale = 1 + (8 - count) * 0.1;
+        }
+        if (count > 7) {
+            scale = 0.9;
+        }
         let node_0 = this.secondStepBigCube[0]
         node_0.is3DNode = true;
         cc.tween(node_0).to(1, { eulerAngles: cc.v3(-90, 0, 0), z: scale }).start();
@@ -314,10 +342,19 @@ export default class ThreeNode extends cc.Component {
         cc.tween(node_5).to(1, { eulerAngles: cc.v3(0, -90, -90), y: -scale }).start();
 
         let slider = this.sliderRotate.getComponent(cc.Slider);
-        cc.tween(slider).to(1, { progress: 1 }).start();
+        cc.tween(slider).to(1, { progress: 1 }).call(() => {
+            this.sliderRotate.getComponent(cc.Slider).enabled = true;
+        }).start();
     }
 
     public merge() {
+        this.sliderMerge.getComponent(cc.Slider).enabled = false;
+        this.secondStepBigCube[0].eulerAngles = cc.v3(-90 * 1, 0, 0);
+        this.secondStepBigCube[1].eulerAngles = cc.v3(180 * 1, -90, 0);
+        this.secondStepBigCube[2].eulerAngles = cc.v3(0, 0, 90 * 1);
+        this.secondStepBigCube[3].eulerAngles = cc.v3(90 * 1, -90 * (1 - 1) + 90 * 1, 0);
+        this.secondStepBigCube[4].eulerAngles = cc.v3(0, 180 * 1, 0);
+        this.secondStepBigCube[5].eulerAngles = cc.v3(0, -90, -90 * 1);
         let slider = this.sliderMerge.getComponent(cc.Slider);
         cc.tween(slider).to(5, { progress: 1 }).start();
 
@@ -330,7 +367,12 @@ export default class ThreeNode extends cc.Component {
 
         let count = SyncDataManager.getSyncData().customSyncData.count;
         let scale = 1 + (8 - count) * 0.15;
-
+        if (count > 5) {
+            scale = 1 + (8 - count) * 0.1;
+        }
+        if (count > 7) {
+            scale = 0.9;
+        }
         SoundManager.stopSoundByName("移动");
         SoundManager.playEffect("移动", false);
         cc.tween(node_0).to(1, { x: 0 }).call(() => {
@@ -361,6 +403,7 @@ export default class ThreeNode extends cc.Component {
                             SoundManager.stopSoundByName("拼");
                             SoundManager.playEffect("拼", false, false);
                             ListenerManager.dispatch(EventType.hebingwancheng);
+                            this.sliderMerge.getComponent(cc.Slider).enabled = true;
                         }).start();
                     }).start();
                 }).start();
@@ -382,6 +425,12 @@ export default class ThreeNode extends cc.Component {
         this.stopAllTween();
         let count = SyncDataManager.getSyncData().customSyncData.count;
         let scale = 1 + (8 - count) * 0.15;
+        if (count > 5) {
+            scale = 1 + (8 - count) * 0.1;
+        }
+        if (count > 7) {
+            scale = 0.9;
+        }
         if (progress * 5 <= 1) {
             this.secondStepBigCube[0].parent.y = 5;
             this.secondStepBigCube[3].parent.y = -5;

@@ -56,6 +56,8 @@ export default class GameUI extends cc.Component {
         top.getChildByName("btn_2_2").getComponent(cc.Label).string = count * 2 + 1 + "";
         top.getChildByName("btn_1_1").active = false;
         top.getChildByName("btn_2_2").active = false;
+        top.getChildByName("btn_1").active = true;
+        top.getChildByName("btn_2").active = true;
     }
 
     onclick_1() {
@@ -109,8 +111,11 @@ export default class GameUI extends cc.Component {
         if (SyncDataManager.getSyncData().customSyncData.count < 8) {
             SyncDataManager.getSyncData().customSyncData.count++;
             this.handleBtnState(SyncDataManager.getSyncData().customSyncData.count);
+            SyncDataManager.getSyncData().customSyncData.curIndex = 0;
             this.threeDNode.init();
+            this.threeDNode.hideZuobiao();
             this.init();
+            
         }
     }
 
@@ -118,7 +123,9 @@ export default class GameUI extends cc.Component {
         if (SyncDataManager.getSyncData().customSyncData.count > 2) {
             SyncDataManager.getSyncData().customSyncData.count--;
             this.handleBtnState(SyncDataManager.getSyncData().customSyncData.count);
+            SyncDataManager.getSyncData().customSyncData.curIndex = 0;
             this.threeDNode.init();
+            this.threeDNode.hideZuobiao();
             this.init();
         }
     }
@@ -163,6 +170,7 @@ export default class GameUI extends cc.Component {
         this.updateBtnState(3);
     }
 
+    
     private onSlideRotate(event) {
         let progress = event.progress;
         this.threeDNode.controlRotate(progress);
@@ -190,8 +198,11 @@ export default class GameUI extends cc.Component {
                     this.threeDNode.init();
                     this.init();
                     this.threeDNode.showStep2();
+                    this.sliderRotate.getComponent(cc.Slider).progress = 0;
                     break;
                 case 3:
+                    this.init();
+                    this.sliderRotate.getComponent(cc.Slider).progress = 1;
                     this.threeDNode.controlMerge(0);
                     this.sliderMerge.getComponent(cc.Slider).progress = 0;
                     break;

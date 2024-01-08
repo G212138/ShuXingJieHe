@@ -76,6 +76,7 @@ var ThreeNode = /** @class */ (function (_super) {
         this.showSecondStep();
     };
     ThreeNode.prototype.reset = function () {
+        SoundManager_1.SoundManager.stopAllEffect();
         var quat = new cc.Quat();
         cc.Quat.fromEuler(quat, 15, -25, -5);
         this.cubeRootNode.setRotation(quat);
@@ -110,6 +111,12 @@ var ThreeNode = /** @class */ (function (_super) {
         // }
         var count = SyncDataManager_1.SyncDataManager.getSyncData().customSyncData.count;
         var scale = 1 + (8 - count) * 0.15;
+        if (count > 5) {
+            scale = 1 + (8 - count) * 0.1;
+        }
+        if (count > 7) {
+            scale = 0.9;
+        }
         var cubeStartX = -count / 2;
         var zuobiao_node = this.node.getChildByName("zuobiao_node");
         zuobiao_node.active = true;
@@ -196,7 +203,14 @@ var ThreeNode = /** @class */ (function (_super) {
                 }
             }
         }
-        this.cubeRootNode.getChildByName("firstStep").scale = 1 + (8 - count) * 0.15;
+        var scale = 1 + (8 - count) * 0.15;
+        if (count > 5) {
+            scale = 1 + (8 - count) * 0.1;
+        }
+        if (count > 7) {
+            scale = 0.9;
+        }
+        this.cubeRootNode.getChildByName("firstStep").scale = scale;
     };
     ThreeNode.prototype.showSecondStep = function () {
         var colorArr = ["#2A82E4", "#E329AE", "#43CF7C", "#7948EA", "#FFC300", "#FF8D1A"];
@@ -220,7 +234,14 @@ var ThreeNode = /** @class */ (function (_super) {
         this.secondStepBigCube[3].parent.y = -5;
         for (var index = 0; index < 6; index++) {
             var node = this.secondStepBigCube[index];
-            node.scale = 1 + (8 - count) * 0.15;
+            var scale = 1 + (8 - count) * 0.15;
+            if (count > 5) {
+                scale = 1 + (8 - count) * 0.1;
+            }
+            if (count > 7) {
+                scale = 0.9;
+            }
+            node.scale = scale;
             node.is3DNode = true;
             if (index == 3 || index == 1 || index == 5) {
                 node.eulerAngles = cc.v3(0, -90, 0);
@@ -271,8 +292,16 @@ var ThreeNode = /** @class */ (function (_super) {
         }
     };
     ThreeNode.prototype.rotation = function () {
+        var _this = this;
+        this.sliderRotate.getComponent(cc.Slider).enabled = false;
         var count = SyncDataManager_1.SyncDataManager.getSyncData().customSyncData.count;
         var scale = 1 + (8 - count) * 0.15;
+        if (count > 5) {
+            scale = 1 + (8 - count) * 0.1;
+        }
+        if (count > 7) {
+            scale = 0.9;
+        }
         var node_0 = this.secondStepBigCube[0];
         node_0.is3DNode = true;
         cc.tween(node_0).to(1, { eulerAngles: cc.v3(-90, 0, 0), z: scale }).start();
@@ -292,9 +321,19 @@ var ThreeNode = /** @class */ (function (_super) {
         node_5.is3DNode = true;
         cc.tween(node_5).to(1, { eulerAngles: cc.v3(0, -90, -90), y: -scale }).start();
         var slider = this.sliderRotate.getComponent(cc.Slider);
-        cc.tween(slider).to(1, { progress: 1 }).start();
+        cc.tween(slider).to(1, { progress: 1 }).call(function () {
+            _this.sliderRotate.getComponent(cc.Slider).enabled = true;
+        }).start();
     };
     ThreeNode.prototype.merge = function () {
+        var _this = this;
+        this.sliderMerge.getComponent(cc.Slider).enabled = false;
+        this.secondStepBigCube[0].eulerAngles = cc.v3(-90 * 1, 0, 0);
+        this.secondStepBigCube[1].eulerAngles = cc.v3(180 * 1, -90, 0);
+        this.secondStepBigCube[2].eulerAngles = cc.v3(0, 0, 90 * 1);
+        this.secondStepBigCube[3].eulerAngles = cc.v3(90 * 1, -90 * (1 - 1) + 90 * 1, 0);
+        this.secondStepBigCube[4].eulerAngles = cc.v3(0, 180 * 1, 0);
+        this.secondStepBigCube[5].eulerAngles = cc.v3(0, -90, -90 * 1);
         var slider = this.sliderMerge.getComponent(cc.Slider);
         cc.tween(slider).to(5, { progress: 1 }).start();
         var node_0 = this.secondStepBigCube[0];
@@ -305,6 +344,12 @@ var ThreeNode = /** @class */ (function (_super) {
         var node_5 = this.secondStepBigCube[5];
         var count = SyncDataManager_1.SyncDataManager.getSyncData().customSyncData.count;
         var scale = 1 + (8 - count) * 0.15;
+        if (count > 5) {
+            scale = 1 + (8 - count) * 0.1;
+        }
+        if (count > 7) {
+            scale = 0.9;
+        }
         SoundManager_1.SoundManager.stopSoundByName("移动");
         SoundManager_1.SoundManager.playEffect("移动", false);
         cc.tween(node_0).to(1, { x: 0 }).call(function () {
@@ -334,6 +379,7 @@ var ThreeNode = /** @class */ (function (_super) {
                             SoundManager_1.SoundManager.stopSoundByName("拼");
                             SoundManager_1.SoundManager.playEffect("拼", false, false);
                             ListenerManager_1.ListenerManager.dispatch(EventType_1.EventType.hebingwancheng);
+                            _this.sliderMerge.getComponent(cc.Slider).enabled = true;
                         }).start();
                     }).start();
                 }).start();
@@ -353,6 +399,12 @@ var ThreeNode = /** @class */ (function (_super) {
         this.stopAllTween();
         var count = SyncDataManager_1.SyncDataManager.getSyncData().customSyncData.count;
         var scale = 1 + (8 - count) * 0.15;
+        if (count > 5) {
+            scale = 1 + (8 - count) * 0.1;
+        }
+        if (count > 7) {
+            scale = 0.9;
+        }
         if (progress * 5 <= 1) {
             this.secondStepBigCube[0].parent.y = 5;
             this.secondStepBigCube[3].parent.y = -5;

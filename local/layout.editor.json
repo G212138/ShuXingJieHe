@@ -5,8 +5,8 @@
       "main": true,
       "url": "app://editor/index.html",
       "windowType": "dockable",
-      "x": -81,
-      "y": 18,
+      "x": 0,
+      "y": 0,
       "width": 1920,
       "height": 1040,
       "layout": {
@@ -44,7 +44,7 @@
             "children": [
               {
                 "width": 1058.984375,
-                "height": 629.65625,
+                "height": 629.28125,
                 "type": "panel",
                 "active": 0,
                 "children": [
@@ -53,7 +53,7 @@
               },
               {
                 "width": 1058.984375,
-                "height": 286.84375,
+                "height": 287.21875,
                 "type": "panel",
                 "active": 0,
                 "children": [
@@ -88,8 +88,7 @@
         "inspector",
         "cocos-services"
       ]
-    },
-    "window-1703744913986": {}
+    }
   },
   "panels": {
     "builder": {

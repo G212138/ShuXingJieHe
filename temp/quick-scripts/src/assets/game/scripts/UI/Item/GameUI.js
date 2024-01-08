@@ -72,6 +72,8 @@ var GameUI = /** @class */ (function (_super) {
         top.getChildByName("btn_2_2").getComponent(cc.Label).string = count * 2 + 1 + "";
         top.getChildByName("btn_1_1").active = false;
         top.getChildByName("btn_2_2").active = false;
+        top.getChildByName("btn_1").active = true;
+        top.getChildByName("btn_2").active = true;
     };
     GameUI.prototype.onclick_1 = function () {
         var top = this.gongshi_2.getChildByName("gongshi_2").getChildByName("top");
@@ -118,7 +120,9 @@ var GameUI = /** @class */ (function (_super) {
         if (SyncDataManager_1.SyncDataManager.getSyncData().customSyncData.count < 8) {
             SyncDataManager_1.SyncDataManager.getSyncData().customSyncData.count++;
             this.handleBtnState(SyncDataManager_1.SyncDataManager.getSyncData().customSyncData.count);
+            SyncDataManager_1.SyncDataManager.getSyncData().customSyncData.curIndex = 0;
             this.threeDNode.init();
+            this.threeDNode.hideZuobiao();
             this.init();
         }
     };
@@ -126,7 +130,9 @@ var GameUI = /** @class */ (function (_super) {
         if (SyncDataManager_1.SyncDataManager.getSyncData().customSyncData.count > 2) {
             SyncDataManager_1.SyncDataManager.getSyncData().customSyncData.count--;
             this.handleBtnState(SyncDataManager_1.SyncDataManager.getSyncData().customSyncData.count);
+            SyncDataManager_1.SyncDataManager.getSyncData().customSyncData.curIndex = 0;
             this.threeDNode.init();
+            this.threeDNode.hideZuobiao();
             this.init();
         }
     };
@@ -191,8 +197,11 @@ var GameUI = /** @class */ (function (_super) {
                     this.threeDNode.init();
                     this.init();
                     this.threeDNode.showStep2();
+                    this.sliderRotate.getComponent(cc.Slider).progress = 0;
                     break;
                 case 3:
+                    this.init();
+                    this.sliderRotate.getComponent(cc.Slider).progress = 1;
                     this.threeDNode.controlMerge(0);
                     this.sliderMerge.getComponent(cc.Slider).progress = 0;
                     break;
